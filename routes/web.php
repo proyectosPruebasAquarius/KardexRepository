@@ -24,3 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/marcas','MarcaController@index');
+Route::get('/categorias','CategoriaController@index');
+Route::get('/productos','ProductoController@index');
+Route::get('/inventarios','InventarioController@index');
+

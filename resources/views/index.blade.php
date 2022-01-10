@@ -20,7 +20,7 @@
 
     <!-- Favicon icon -->
     <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
-
+    
     <!-- font css -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
@@ -28,7 +28,8 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
-
+    @stack('partial-style')
+    @livewireStyles
 </head>
 
 <body class="">
@@ -99,8 +100,14 @@
     <script src="{{ asset('assets/js/vendor-all.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+   <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
     @stack('scripts')
+    @livewireScripts
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+    <x-livewire-alert::scripts />
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
     <!-- <script src="assets/js/plugins/clipboard.min.js"></script> -->
     <!-- <script src="assets/js/uikit.min.js"></script> -->
@@ -112,7 +119,23 @@
 </script> --}}
 
 <!-- custom-chart js -->
-<script src="{{ asset('assets/js/pages/dashboard-sale.js') }}"></script>
+<!--<script src="{{ asset('assets/js/pages/dashboard-sale.js') }}"></script>-->
 </body>
 
 </html>
+@stack('datatable-scripts')
+
+<script>
+    (function () {
+        let alert = @js(session('alert'));
+        if (alert) {        
+            Swal.fire({
+                icon: alert['type'],
+                title: alert['message'],
+                timer: 1500,
+                position: alert['position']
+            })
+            @js(session()->forget('alert'))
+        }
+    }())
+</script>
