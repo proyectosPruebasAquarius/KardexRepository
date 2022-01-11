@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Almacen;
 use Illuminate\Http\Request;
-use App\Inventario;
-use App\DetalleInventariosModel;
-class InventarioController extends Controller
+
+class AlmacenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,9 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        $inventarios = Inventario::join('productos','productos.id','=','inventarios.id_producto')->join('proveedores','proveedores.id','=','productos.id_proveedor')
-        ->join('almacenes','almacenes.id','=','inventarios.id_almacen')
-        ->where('inventarios.estado',1)->select('productos.id as producto','productos.nombre as nombre_producto','productos.cod_producto','almacenes.id as almacen',
-        'almacenes.nombre as nombre_almacen','cantidad_min as min','cantidad_max as max','inventarios.id as id_inventario','proveedores.nombre as proveedor')->get();
-        return view('partials.inventarios')->with('inventarios',$inventarios);
+        $data  = Almacen::where('estado', 1)->get();
+
+        return view('layouts.almacenes')->with('data', $data);
     }
 
     /**
@@ -28,8 +26,7 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        $lastInsert = DetalleInventariosModel::select('cantidad_saldo','total_saldo')->orderBy('id','desc')->get();
-        return $lastInsert[0];
+        //
     }
 
     /**
@@ -46,10 +43,10 @@ class InventarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Almacen  $almacen
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Almacen $almacen)
     {
         //
     }
@@ -57,10 +54,10 @@ class InventarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Almacen  $almacen
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Almacen $almacen)
     {
         //
     }
@@ -69,10 +66,10 @@ class InventarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Almacen  $almacen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Almacen $almacen)
     {
         //
     }
@@ -80,10 +77,10 @@ class InventarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Almacen  $almacen
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Almacen $almacen)
     {
         //
     }

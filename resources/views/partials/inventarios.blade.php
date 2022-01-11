@@ -35,6 +35,8 @@
 
                         <!-- Button trigger modal -->
                         @livewire('inventarios')
+                        @livewire('detalle-inventarios')
+                        @livewire('historial-inventario')
                         <button type="button" class="btn  btn-primary" data-toggle="modal"
                             data-target="#inventarioModal">Agregar <span class="pc-micon"><i
                                     class="material-icons-two-tone text-white">add</i></span></button>
@@ -42,11 +44,12 @@
                 </div>
                 <div class="card-body">
 
-                    <table class="table" id="table_id">
-                        <thead class="text-center">
+                    <table class="table " id="table_id">
+                        <thead class="text-center table-responsive " >
                             <tr>
                                 <th scope="col">Codigo del Producto</th>
                                 <th scope="col">Producto</th>
+                                <th scope="col">Proveedor</th>
                                 <th scope="col">Almacen</th>
                                 <th scope="col">Cantidad Maxima</th>
                                 <th scope="col">Cantidad Minima</th>
@@ -58,6 +61,7 @@
                             <tr>
                                 <td>{{ $i->cod_producto }}</td>
                                 <td>{{ $i->nombre_producto }}</td>
+                                <td>{{ $i->proveedor }}</td>
                                 <td>{{ $i->nombre_almacen }}</td>
                                 <td>{{ $i->max }}</td>
                                 <td>{{ $i->min }}</td>
@@ -66,6 +70,10 @@
                                         onclick="Livewire.emit('asignInventario',@js($i) )"><i
                                             class="icon feather icon-edit f-16 text-success"></i></a>
                                     <a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                    <a type="button" data-toggle="modal" data-target="#detalleInventarioModal"
+                                    onclick="Livewire.emit('asignDetalleInventario',@js($i) )" ><i class="feather icon-file-plus ml-3 f-16 text-info"></i></a>
+                                    <a type="button" data-toggle="modal" data-target="#historialModal"
+                                    onclick="Livewire.emit('asignDetalle',@js($i) )" ><i class="feather icon-external-link ml-3 f-16 text-secondary"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -94,12 +102,7 @@
                     "url": "https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
                 },
                
-            });
-            
-
-    
-
-
+            });        
 
 } );
 

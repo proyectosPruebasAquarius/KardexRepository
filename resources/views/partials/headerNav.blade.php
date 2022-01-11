@@ -37,20 +37,45 @@
                     <label>Navegación</label>
                 </li>
                 <li class="pc-item">
-                    <a href="/" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Inicio</span></a>
+                    <a href="/" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">home</i></span><span class="pc-mtext">Inicio</span></a>
                 </li>
                 <li class="pc-item">
-                    <a href="/marcas" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">shopping_bag</i></span><span class="pc-mtext">Marcas</span></a>
+                    <a href="/marcas" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">shopping_bag</i></span><span
+                            class="pc-mtext">Marcas</span></a>
                 </li>
                 <li class="pc-item">
-                    <a href="/categorias" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">category</i></span><span class="pc-mtext">Categorias</span></a>
+                    <a href="/categorias" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">category</i></span><span
+                            class="pc-mtext">Categorias</span></a>
                 </li>
                 <li class="pc-item">
-                    <a href="/productos" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">local_mall</i></span><span class="pc-mtext">Productos</span></a>
+                    <a href="/productos" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">local_mall</i></span><span
+                            class="pc-mtext">Productos</span></a>
                 </li>
                 <li class="pc-item">
-                    <a href="/inventarios" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">receipt_long</i></span><span class="pc-mtext">Inventarios</span></a>
+                    <a href="/inventarios" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">receipt_long</i></span><span
+                            class="pc-mtext">Inventarios</span></a>
                 </li>
+                <li class="pc-item">
+                    <a href="{{ route('almacenes') }}" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">apartment</i></span><span
+                            class="pc-mtext">Almacenes</span></a>
+                </li>
+                <li class="pc-item">
+                    <a href="{{ route('proveedores') }}" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">contacts</i></span><span
+                            class="pc-mtext">Proveedores</span></a>
+                </li>
+                @auth
+                <li class="pc-item">
+                    <a href="{{ route('usuarios') }}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">admin_panel_settings</i></span><span class="pc-mtext">Usuarios</span></a>
+                </li>
+                @endauth
+
             </ul>
         </div>
     </div>
@@ -69,11 +94,12 @@
                                     <div class="hamburger-inner"></div>
                                 </div>
                             </div>
-                        </a>                        
+                        </a>
                     </div>
                 </li>
                 {{-- <li class="dropdown pc-h-item">
-                    <a class="pc-head-link active dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="pc-head-link active dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         Level
                     </a>
                     <div class="dropdown-menu pc-h-dropdown">
@@ -133,14 +159,16 @@
         <div class="ml-auto">
             <ul class="list-unstyled">
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="material-icons-two-tone">search</i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pc-h-dropdown drp-search">
                         <form class="px-3">
                             <div class="form-group mb-0 d-flex align-items-center">
                                 <i data-feather="search"></i>
-                                <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
+                                <input type="search" class="form-control border-0 shadow-none"
+                                    placeholder="Search here. . .">
                             </div>
                         </form>
                     </div>
@@ -149,23 +177,35 @@
                     @livewire('notifications')
                 </li>
                 <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    @auth
+                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
                         <span>
-                            <span class="user-name">Joseph William</span>
-                            <span class="user-desc">Administrator</span>
+                            <span class="user-name">{{ auth()->user()->name }}</span>
+                            <span class="user-desc">{{ auth()->user()->email }}</span>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
                         <div class=" dropdown-header">
-                            <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="https://gumroad.com/dashboardkit" target="_blank">Upgrade to Pro</a></span></h5>
+                            <h5 class="text-overflow m-0"><span class="badge bg-light-primary">{{ auth()->user()->email
+                                    }}</span></h5>
                         </div>
-            
-                        <a href="auth-signin.html" class="dropdown-item">
-                            <i class="material-icons-two-tone">chrome_reader_mode</i>
-                            <span>Logout</span>
+
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Cerrar Sesión') }}
                         </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
+                    @else
+                    <a href="{{ route('login') }}">
+                        Iniciar Sesión{{-- <i data-feather="user"></i> --}}
+                    </a>
+                    @endauth
                 </li>
             </ul>
         </div>
@@ -173,8 +213,8 @@
     </div>
 </header>
 @push('scripts')
-    <script>
-        'use strict';
+<script>
+    'use strict';
 
         
 
@@ -191,6 +231,6 @@
                 document.querySelector('.pc-container').classList.add('margin-container')
             }
         }  
-    </script>
+</script>
 @endpush
 <!-- [ Header ] end -->
