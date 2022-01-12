@@ -109,7 +109,16 @@
                                             @endif
 
                                         </td>
-                                        <td>$ {{ $d->precio_unitario }}</td>
+                                      
+                                        <td>
+                                            @if ($d->total_entrada == null)
+
+                                            @else
+                                            $ {{ $d->precio_unitario }}
+                                            @endif    
+                                            
+                                            
+                                        </td>
                                         <td>
                                             @if ($d->total_entrada == null)
                                             
@@ -127,7 +136,11 @@
 
 
                                         </td>
-                                        <td>$ {{ $d->precio_unitario }}</td>
+                                        <td> @if ($d->total_salida == null)
+
+                                            @else
+                                            $ {{ $d->precio_unitario }}
+                                            @endif  </td>
                                         <td>
                                             @if ($d->total_salida == null)
                                            
