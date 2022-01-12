@@ -45,27 +45,27 @@
                 <div class="card-body">
 
                     <table class="table " id="table_id">
-                        <thead class="text-center table-responsive " >
+                        <thead class=" table-responsive " >
                             <tr>
-                                <th scope="col">Codigo del Producto</th>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Proveedor</th>
-                                <th scope="col">Almacen</th>
-                                <th scope="col">Cantidad Maxima</th>
-                                <th scope="col">Cantidad Minima</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col" class="text-start">Codigo del Producto</th>
+                                <th scope="col" class="text-center">Producto</th>
+                                <th scope="col" class="text-center">Proveedor</th>
+                                <th scope="col" class="text-center">Almacen</th>
+                                <th scope="col" class="text-center">Cantidad Maxima</th>
+                                <th scope="col" class="text-center">Cantidad Minima</th>
+                                <th scope="col" class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody >
                             @foreach ($inventarios as $i)
                             <tr>
-                                <td>{{ $i->cod_producto }}</td>
-                                <td>{{ $i->nombre_producto }}</td>
-                                <td>{{ $i->proveedor }}</td>
-                                <td>{{ $i->nombre_almacen }}</td>
-                                <td>{{ $i->max }}</td>
-                                <td>{{ $i->min }}</td>
-                                <td>
+                                <td class="text-start">{{ $i->cod_producto }}</td>
+                                <td class="text-center">{{ $i->nombre_producto }}</td>
+                                <td class="text-center">{{ $i->proveedor }}</td>
+                                <td class="text-center">{{ $i->nombre_almacen }}</td>
+                                <td class="text-center">{{ $i->max }}</td>
+                                <td class="text-center">{{ $i->min }}</td>
+                                <td class="text-center">
                                     <a type="button" data-toggle="modal" data-target="#inventarioModal"
                                         onclick="Livewire.emit('asignInventario',@js($i) )"><i
                                             class="icon feather icon-edit f-16 text-success"></i></a>

@@ -43,25 +43,25 @@
                 <div class="card-body">
 
                     <table class="table" id="table_id">
-                        <thead class="text-center">
+                        <thead>
                             <tr>
-                                <th scope="col">Codigo del Producto</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Marca</th>
-                                <th scope="col">Categoria</th>
-                                <th scope="col">Proveedor</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col" class="text-start">Codigo del Producto</th>
+                                <th scope="col" class="text-center">Nombre</th>
+                                <th scope="col" class="text-center">Marca</th>
+                                <th scope="col" class="text-center">Categoria</th>
+                                <th scope="col" class="text-center">Proveedor</th>
+                                <th scope="col" class="text-center">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="text-center">
+                        <tbody >
                             @foreach ($productos as $p)
                             <tr>
-                                <td>{{ $p->cod_producto }}</td>
-                                <td>{{ $p->producto }}</td>
-                                <td>{{ $p->nombre_marca }}</td>
-                                <td>{{ $p->nombre_categoria }}</td>
-                                <td>{{ $p->nombre_proveedor }}</td>
-                                <td>
+                                <td class="text-start">{{ $p->cod_producto }}</td>
+                                <td class="text-center">{{ $p->producto }}</td>
+                                <td class="text-center">{{ $p->nombre_marca }}</td>
+                                <td class="text-center">{{ $p->nombre_categoria }}</td>
+                                <td class="text-center">{{ $p->nombre_proveedor }}</td>
+                                <td class="text-center">
                                     <a type="button" data-toggle="modal" data-target="#productoModal"
                                         onclick="Livewire.emit('asignProducto',@js($p) )"><i
                                             class="icon feather icon-edit f-16 text-success"></i></a>

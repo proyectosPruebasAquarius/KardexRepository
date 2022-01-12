@@ -45,17 +45,42 @@
                             </table>
                             <br>
 
-                            <table class="table">
-                                <thead class="text-center">
+                            <table class="table table-bordered">
+                                <thead class="text-center" style="border-bottom: 1px solid #060606 !important;">
                                     <tr>
-                                        <th scope="col">Fecha</th>
+                                        <th scope="col" rowspan="2" class="text-center">Fecha</th>
+                                        <th scope="col" colspan="1" class="text-center">Detalle</th>
+                                        <th scope="col" colspan="3" class="text-center">Entradas</th>
+                                        <th scope="col" colspan="3" class="text-center">Salidas</th>
+                                        <th scope="col" colspan="3" class="text-center">Saldos</th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">CONCEPTO</th>
+                                        
+                                        <th scope="col">CANTIDAD</th>
+                                        <th scope="col">VR. UNITARIO</th>
+                                        <th scope="col">VR. TOTAL</th>
+
+                                        <th scope="col">CANTIDAD</th>
+                                        <th scope="col">VR. UNITARIO</th>
+                                        <th scope="col">VR. TOTAL</th>
+                                        
+                                        <th scope="col">CANTIDAD</th>
+                                        <th scope="col">VR. UNITARIO</th>
+                                        <th scope="col">VR. TOTAL</th>
+                                    </tr>
+                                    <!--<tr>
+                                        <th colspan="">Fecha</th>
+                                        
+                                        <th scope="col">Concepto</th>
+                                        <th scope="col">Precio Unitario</th>
                                         <th scope="col">Cantidad de entrada</th>
                                         <th scope="col">Total de Entrada</th>
                                         <th scope="col">Cantidad de Salida</th>
                                         <th scope="col">Total de Salida</th>
                                         <th scope="col">Cantidad de Saldo</th>
                                         <th scope="col">Total de Saldo</th>
-                                    </tr>
+                                    </tr>-->
                                 </thead>
                                 <tbody class="text-center">
                                     @if (sizeof($detalle) == 0)
@@ -68,17 +93,20 @@
                                     @foreach ($detalle as $d)
                                     <tr>
                                         <td>{{ $d->fecha_registro }}</td>
+                                        <td scope="col" colspan="1">{{ $d->concepto }}</td>
+                                       
                                         <td>
                                             @if ($d->cantidad_entrada == null)
-                                            sin registro
+                                           
                                             @else
                                             {{ $d->cantidad_entrada }}
                                             @endif
 
                                         </td>
+                                        <td>$ {{ $d->precio_unitario }}</td>
                                         <td>
                                             @if ($d->total_entrada == null)
-                                            sin registro
+                                            
                                             @else
                                             $ {{ $d->total_entrada }}
                                             @endif
@@ -86,22 +114,24 @@
                                         </td>
                                         <td>
                                             @if ($d->cantidad_salida == null)
-                                            sin registro
+                                           
                                             @else
                                             {{ $d->cantidad_salida }}
                                             @endif
 
 
                                         </td>
+                                        <td>$ {{ $d->precio_unitario }}</td>
                                         <td>
                                             @if ($d->total_salida == null)
-                                            sin registro
+                                           
                                             @else
                                             $ {{ $d->total_salida }}
                                             @endif
 
                                         </td>
                                         <td>{{ $d->cantidad_saldo }}</td>
+                                        <td>$ {{ $d->precio_unitario }}</td>
                                         <td>$ {{ $d->total_saldo }}</td>
                                     </tr>
                                     @endforeach
@@ -117,11 +147,7 @@
                     <div class="modal-footer col-12">
                         <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cerrar <i
                                 class="material-icons-two-tone text-white">close</i></button>
-                        <button type="submit" class="btn  btn-primary" form="detalleInventarioForm">
-
-                            Guardar
-
-                            <i class="material-icons-two-tone text-white">save</i></button>
+                       
 
                     </div>
                 </div>
