@@ -50,7 +50,7 @@
                                 <th scope="col" class="text-start">Codigo del Producto</th>
                                 <th scope="col" class="text-start">Producto</th>
                                 <th scope="col" class="text-center">Proveedor</th>
-                                <th scope="col" class="text-center">Almacen</th>
+                                <th scope="col" class="text-start">Almacen</th>
                                 <th scope="col" class="text-center">Cantidad Maxima</th>
                                 <th scope="col" class="text-center">Cantidad Minima</th>
                                 <th scope="col" class="text-center">Acciones</th>
@@ -62,7 +62,7 @@
                                 <td class="text-start">{{ $i->cod_producto }}</td>
                                 <td class="text-start">{{ $i->nombre_producto }}</td>
                                 <td class="text-center">{{ $i->proveedor }}</td>
-                                <td class="text-center">{{ $i->nombre_almacen }}</td>
+                                <td class="text-start">{{ $i->nombre_almacen }}</td>
                                 <td class="text-center">{{ $i->max }}</td>
                                 <td class="text-center">{{ $i->min }}</td>
                                 <td class="text-center">
