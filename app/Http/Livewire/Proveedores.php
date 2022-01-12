@@ -46,7 +46,7 @@ class Proveedores extends Component
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
                 $this->toastM('error', 'Ocurrió un error porfavor intentelo mas tarde.');
-                \Debugbar::info($th->getMessage());
+              
             }
         } else {
             try {
@@ -56,7 +56,7 @@ class Proveedores extends Component
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
                 $this->toastM('error', 'Ocurrió un error porfavor intentelo mas tarde.');
-                \Debugbar::info($th->getMessage());
+                
             }
         }        
     }

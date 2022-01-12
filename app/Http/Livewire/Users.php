@@ -42,8 +42,7 @@ class Users extends Component
                 session(['alert' => ['type' => 'success', 'message' => 'Dato actualizado con éxito.']]);
                 return redirect()->to('/usuarios');
             } catch (\Exception $th) {
-                //ocurrio un error inesperado
-                \Debugbar::info($th->getMessage());
+               
                 $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
                     'position' => 'bottom'
                 ]);
@@ -56,7 +55,7 @@ class Users extends Component
                 return redirect()->to('/usuarios');
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
-                \Debugbar::info($th->getMessage());
+              
                 $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
                     'position' => 'bottom'
                 ]);
