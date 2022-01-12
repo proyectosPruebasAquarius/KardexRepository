@@ -17,24 +17,30 @@
                                     @foreach ($inventarios as $i)
                                     <tr>
                                         <th scope="col">Producto:
+                                            <br>
                                             {{ $i->producto }}
                                         </th>
                                         <th scope="col">Codigo del Producto:
+                                            <br>
                                             {{ $i->cod_producto }}
                                         </th>
                                         <th scope="col">Ubicacion:
+                                            <br>
                                             {{ $i->almacen }}
                                         </th>
                                         <th scope="col">Proveedor:
+                                            <br>
                                             {{ $i->proveedor }}
                                         </th>
 
                                     </tr>
                                     <tr>
                                         <th scope="col">Cantidad Minima:
+                                            <br>
                                             {{ $i->cantidad_min }}
                                         </th>
                                         <th scope="col">Cantidad Maxima:
+                                            <br>
                                             {{ $i->cantidad_max }}
                                         </th>
 
