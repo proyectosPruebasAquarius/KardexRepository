@@ -45,7 +45,7 @@ class Almacenes extends Component
                 return redirect()->to('/almacenes');
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
-                \Debugbar::info($th->getMessage());
+                
                 $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
                     'position' => 'bottom'
                 ]);
@@ -58,7 +58,7 @@ class Almacenes extends Component
                 return redirect()->to('/almacenes');
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
-                \Debugbar::info($th->getMessage());
+                
                 $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
                     'position' => 'bottom'
                 ]);

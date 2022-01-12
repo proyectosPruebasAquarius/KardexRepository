@@ -65,7 +65,7 @@
                                     <a type="button" data-toggle="modal" data-target="#productoModal"
                                         onclick="Livewire.emit('asignProducto',@js($p) )"><i
                                             class="icon feather icon-edit f-16 text-success"></i></a>
-                                    <a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                    <a type="button" onclick="trash(@js($p->id_producto))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -82,7 +82,24 @@
 @push('scripts')
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
-
+<script>
+    let trash = (id) => {
+        Swal.fire({
+            title: '¿Estás seguro que deseas eliminar este dato?',
+            text: "¡Está acción es irreversible!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, borrar',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('dropByStateProducto', id)
+            }
+        })
+    }
+</script>
 @endpush
 
 @push('datatable-scripts')

@@ -4,14 +4,15 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\MarcaModel;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Marca extends Component
 {
+    use LivewireAlert;
     public $nombre;
     public $error;
     public $id_marca;
     public $marcas =[];
-    protected $listeners = ['listReload' => '$refresh','resetNames' => 'resetInput','asignMarca' => 'asignMarca'];
+    protected $listeners = ['listReload' => '$refresh','resetNames' => 'resetInput','asignMarca' => 'asignMarca','dropByStateMarca' => 'dropByState'];
     protected $rules = [
         'nombre' => 'required|min:4|max:100',
         
@@ -70,6 +71,23 @@ class Marca extends Component
         }
        
     }
+
+
+    public function dropByState($id)
+    {
+        try {
+            MarcaModel::where('id',$id)->update(['estado' => 0]);               
+            session(['alert' => ['type' => 'success', 'message' => 'Marca eliminada con éxito.']]);
+            return redirect()->to('/marcas');
+        } catch (\Exception $th) {
+           
+            $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
+                'position' => 'center'
+            ]);
+        }
+    }
+
+
     public function render()
     {
         

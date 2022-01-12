@@ -16,7 +16,7 @@ class Users extends Component
     public $password;
     public $idUser;
 
-    protected $listeners = ['resetUserModal' => 'resetState'/* , 'assignUser' => 'assign' */];
+    protected $listeners = ['resetUserModal' => 'resetState','trashUser' => 'trash'/* , 'assignUser' => 'assign' */];
 
     protected $rules = [
         'name' => 'required|min:4|max:255|string',
@@ -79,6 +79,12 @@ class Users extends Component
         $this->idUser = $e['id'];
         $this->name = $e['name'];
         $this->email = $e['email'];
+    }
+    public function trash($id)
+    {
+        User::findOrFail($id)->delete();
+        session(['alert' => ['type' => 'success', 'message' => 'Usuario eliminado con éxito.']]);
+        return redirect()->to('/usuarios');
     }
 
     public function render()

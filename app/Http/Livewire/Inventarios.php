@@ -6,9 +6,10 @@ use Livewire\Component;
 use App\Inventario;
 use App\Producto;
 use App\Almacen;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Inventarios extends Component
 {
+    use LivewireAlert;
     public $productos = [];
     public $almacenes = [];
     public $producto;
@@ -16,7 +17,7 @@ class Inventarios extends Component
     public $min;
     public $max;
     public $id_inventario;
-    protected $listeners = ['resetNamesInventarios' => 'resetInput','asignInventario' => 'asignInventario'];
+    protected $listeners = ['resetNamesInventarios' => 'resetInput','asignInventario' => 'asignInventario','dropByStateInventario' => 'dropByState'];
 
     protected $rules = [
         'min' => 'required|min:1',
@@ -96,6 +97,19 @@ class Inventarios extends Component
             }
         }
         
+    }
+    public function dropByState($id)
+    {
+        try {
+            Inventario::where('id',$id)->update(['estado' => 0]);               
+            session(['alert' => ['type' => 'success', 'message' => 'Inventario eliminado con éxito.']]);
+            return redirect()->to('/inventarios');
+        } catch (\Exception $th) {
+           
+            $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
+                'position' => 'center'
+            ]);
+        }
     }
 
     public function render()

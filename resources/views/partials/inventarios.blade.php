@@ -69,7 +69,7 @@
                                     <a type="button" data-toggle="modal" data-target="#inventarioModal"
                                         onclick="Livewire.emit('asignInventario',@js($i) )"><i
                                             class="icon feather icon-edit f-16 text-success"></i></a>
-                                    <a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                    <a type="button" onclick="trash(@js($i->id_inventario))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
                                     <a type="button" data-toggle="modal" data-target="#detalleInventarioModal"
                                     onclick="Livewire.emit('asignDetalleInventario',@js($i) )" ><i class="feather icon-file-plus ml-3 f-16 text-info"></i></a>
                                     <a type="button" data-toggle="modal" data-target="#historialModal"
@@ -90,6 +90,24 @@
 @push('scripts')
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
+<script>
+    let trash = (id) => {
+        Swal.fire({
+            title: '¿Estás seguro que deseas eliminar este dato?',
+            text: "¡Está acción es irreversible!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, borrar',
+            cancelButtonText: 'Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('dropByStateInventario', id)
+            }
+        })
+    }
+</script>
 
 @endpush
 

@@ -12,7 +12,7 @@ class Categorias extends Component
    
     public $id_categoria;
     public $categorias = [];
-    protected $listeners = ['listReloadCategoria' => '$refresh','resetNamesCat' => 'resetInput','asignCategoria' =>'asignCategoria'];
+    protected $listeners = ['listReloadCategoria' => '$refresh','resetNamesCat' => 'resetInput','asignCategoria' =>'asignCategoria','dropByStateCategoria' => 'dropByState'];
     protected $rules = [
         'nombre' => 'required|min:4|max:100',
         
@@ -74,7 +74,19 @@ class Categorias extends Component
        }
        
     }
-
+    public function dropByState($id)
+    {
+        try {
+            Categoria::where('id',$id)->update(['estado' => 0]);               
+            session(['alert' => ['type' => 'success', 'message' => 'Categoria eliminada con éxito.']]);
+            return redirect()->to('/categorias');
+        } catch (\Exception $th) {
+           
+            $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
+                'position' => 'center'
+            ]);
+        }
+    }
 
     public function render()
     {

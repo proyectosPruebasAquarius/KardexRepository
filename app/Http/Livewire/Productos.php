@@ -8,9 +8,10 @@ use App\Almacen;
 use App\Proveedor;
 use App\MarcaModel;
 use App\Categoria;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Productos extends Component
 {
+    use LivewireAlert;
     public $categorias = [];
     public $marcas = [];
     public $proveedores = [];
@@ -20,7 +21,7 @@ class Productos extends Component
     public $marca;
     public $categoria;
     public $proveedor;
-    protected $listeners = ['resetNamesProductos' => 'resetInput','asignProducto' => 'asignProducto'];
+    protected $listeners = ['resetNamesProductos' => 'resetInput','asignProducto' => 'asignProducto','dropByStateProducto' => 'dropByState'];
     protected $rules = [
         'producto' => 'required|min:4|max:100',
         'cod_producto' => 'required|min:4|max:50',
@@ -107,7 +108,19 @@ class Productos extends Component
         
     }
 
-
+    public function dropByState($id)
+    {
+        try {
+            Producto::where('id',$id)->update(['estado' => 0]);               
+            session(['alert' => ['type' => 'success', 'message' => 'Producto eliminado con éxito.']]);
+            return redirect()->to('/productos');
+        } catch (\Exception $th) {
+           
+            $this->alert('error', 'Ocurrió un error porfavor intentelo mas tarde.', [
+                'position' => 'center'
+            ]);
+        }
+    }
 
 
 

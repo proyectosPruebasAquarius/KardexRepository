@@ -77,10 +77,10 @@
         Livewire.emit('resetUserModal')
     })
 
-    Livewire.on('listReload', function () {
+    /*Livewire.on('listReload', function () {
         var modal = new bootstrap.Modal(document.getElementById('exampleModalCenter'))
         modal.hide();
-    })
+    })*/
 
     let trash = (id) => {
         Swal.fire({
@@ -94,7 +94,7 @@
             cancelButtonText: 'Cancelar',
             }).then((result) => {
             if (result.isConfirmed) {
-                Livewire.emit('dropByState', id)
+                Livewire.emit('trashUser', id)
             }
         })
     }

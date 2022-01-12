@@ -69,10 +69,10 @@
         Livewire.emit('resetData')
     })
 
-    Livewire.on('listReload', function () {
+    /*Livewire.on('listReload', function () {
         var modal = new bootstrap.Modal(document.getElementById('exampleModalCenter'))
         modal.hide();
-    })
+    })*/
 
     let trash = (id) => {
         Swal.fire({
@@ -82,7 +82,8 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, borrar'
+            confirmButtonText: 'Si, borrar',
+            cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.isConfirmed) {
                 Livewire.emit('dropByState', id)
