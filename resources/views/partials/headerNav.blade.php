@@ -77,7 +77,7 @@
                 </li>
                 <li class="pc-item">
                     <a href="/tiendas" class="pc-link "><span class="pc-micon"><i
-                                class="material-icons-two-tone">text_snippet</i></span><span
+                                class="material-icons-two-tone">store</i></span><span
                             class="pc-mtext">Tiendas</span></a>
                 </li>
                 @auth

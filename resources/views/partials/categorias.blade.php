@@ -43,18 +43,18 @@
             <div class="card-body">
 
                 <table class="table" id="table_id">
-                    <thead class="text-center">
+                    <thead >
                         <tr>
                           
-                            <th scope="col">Nombre</th>
-                           <th scope="col">Acciones</th>
+                            <th scope="col" class="text-start">Nombre</th>
+                           <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody >
                         @foreach ($categorias as $c)
                         <tr>
-                            <td>{{ $c->nombre }}</td>
-                            <td>
+                            <td class="text-start" >{{ $c->nombre }}</td>
+                            <td  class="text-center">
                                 <a type="button"  data-toggle="modal"
                                 data-target="#categoriaModal" onclick="Livewire.emit('asignCategoria',@js($c) )" ><i class="icon feather icon-edit f-16 text-success"></i></a>
                                 <a type="button" onclick="trash(@js($c->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>

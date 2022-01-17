@@ -42,18 +42,18 @@
             <div class="card-body">
 
                 <table class="table" id="table_id">
-                    <thead class="text-center bg-secondary text-white">
+                    <thead class=" bg-secondary text-white">
                         <tr>
                           
-                            <th scope="col">Nombre</th>
-                           <th scope="col">Acciones</th>
+                            <th scope="col " class="text-start">Nombre</th>
+                           <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody >
                         @foreach ($marcas as $m)
                         <tr>
-                            <td>{{ $m->nombre }}</td>
-                            <td>
+                            <td class="text-start">{{ $m->nombre }}</td>
+                            <td class="text-center">
                                 <a type="button"  data-toggle="modal"
                                 data-target="#marcaModal" onclick="Livewire.emit('asignMarca',@js($m) )"><i class="icon feather icon-edit f-16 text-success"></i></a>
                                 <a type="button" onclick="trash(@js($m->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
