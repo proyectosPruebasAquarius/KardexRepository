@@ -59,9 +59,11 @@
                                 is-invalid
                             @enderror
                             " wire:model="almacen" >
-                            <option selected >Seleciona una opción</option>
+                           
                             @forelse ($almacenes as $a)
-                            
+                            @if ($loop->first)
+                            <option  style="display: none;" >Seleciona una opción</option>                           
+                            @endif
                             <option  value="{{ $a->id }}">{{ $a->nombre }}</option>
                             
                                   
@@ -72,6 +74,29 @@
                             <label for="almacen">Almacenes</label>
                             @error('almacen') <span class="error">{{ $message }}</span> @enderror
                         </div>
+
+
+                        <div class="form-floating mb-3">  
+                            <select name="zona_almacen" id="zona_almacen" class="form-select 
+                            @error('zona_almacen')
+                                is-invalid
+                            @enderror
+                            " wire:model="zona_almacen" >
+                           
+                          
+                            @forelse ($zonas as $z)
+                            @if ($loop->first)
+                            <option  style="display: none;" >Seleciona una opción</option>                           
+                            @endif
+                            <option  value="{{ $z->id }}">{{ $z->nombre }}</option>                                  
+                            @empty
+                            <option value="0"  >No hay Opciones Disponibles</option>
+                            @endforelse
+                            </select>                                                         
+                            <label for="zona_almacen">Zonas de Almacenes</label>
+                            @error('zona_almacen') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+
 
 
                        

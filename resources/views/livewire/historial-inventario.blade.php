@@ -12,8 +12,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive">
-                            <table class="table ">
-                                <thead>
+                            <table class="table table-bordered border-dark" >
+                                <thead >
                                     @foreach ($inventarios as $i)
                                     <tr>
                                         <th scope="col">Producto:
@@ -27,6 +27,10 @@
                                         <th scope="col">Ubicacion:
                                             <br>
                                             {{ $i->almacen }}
+                                            <br>
+                                            Zona:
+                                            <br>
+                                            {{ $i->zona_almacen }}
                                         </th>
                                         <th scope="col">Proveedor:
                                             <br>
@@ -43,6 +47,7 @@
                                             <br>
                                             {{ $i->cantidad_max }}
                                         </th>
+                                       
 
                                     </tr>
                                     @endforeach
@@ -51,18 +56,18 @@
                             </table>
                             <br>
 
-                            <table class="table table-bordered">
-                                <thead class="text-center" style="border-bottom: 1px solid #060606 !important;">
+                            <table class="table table-bordered border-dark">
+                                <thead class="text-center" >
                                     <tr>
-                                        <th scope="col" rowspan="2" class="text-center">Fecha</th>
-                                        <th scope="col" colspan="1" class="text-center">Detalle</th>
+                                        <th scope="col" rowspan="0.5" class="text-center">Fecha</th>
+                                        <th scope="col" colspan="2" class="text-center">Detalle</th>
                                         <th scope="col" colspan="3" class="text-center">Entradas</th>
                                         <th scope="col" colspan="3" class="text-center">Salidas</th>
                                         <th scope="col" colspan="3" class="text-center">Saldos</th>
                                     </tr>
                                     <tr>
                                         <th scope="col">CONCEPTO</th>
-                                        
+                                        <th scope="col">DOC</th>
                                         <th scope="col">CANTIDAD</th>
                                         <th scope="col">VR. UNITARIO</th>
                                         <th scope="col">VR. TOTAL</th>
@@ -100,7 +105,19 @@
                                     <tr>
                                         <td>{{ $d->fecha_registro }}</td>
                                         <td scope="col" colspan="1">{{ $d->concepto }}</td>
-                                       
+                                        <td scope="col" colspan="1">
+                                            Tipo: {{ $d->tipo_documento }}   
+                                            <br>                                             
+                                            No: {{ $d->factura }}
+                                            @if ($d->cantidad_entrada !== null)
+                                            <br>
+                                            No Pro: {{ $d->factura_proveedor }}
+                                            @else
+
+                                            @endif
+                                            
+                                        
+                                        </td>
                                         <td>
                                             @if ($d->cantidad_entrada == null)
                                            
@@ -164,10 +181,7 @@
 
                     </div>
                     <div class="modal-footer col-12">
-                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cerrar <i
-                                class="material-icons-two-tone text-white">close</i></button>
-                       
-
+                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cerrar</button>                       
                     </div>
                 </div>
             </div>

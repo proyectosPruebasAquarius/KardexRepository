@@ -15,9 +15,9 @@ class InventarioController extends Controller
     public function index()
     {
         $inventarios = Inventario::join('productos','productos.id','=','inventarios.id_producto')->join('proveedores','proveedores.id','=','productos.id_proveedor')
-        ->join('almacenes','almacenes.id','=','inventarios.id_almacen')
-        ->where('inventarios.estado',1)->select('productos.id as producto','productos.nombre as nombre_producto','productos.cod_producto','almacenes.id as almacen',
-        'almacenes.nombre as nombre_almacen','cantidad_min as min','cantidad_max as max','inventarios.id as id_inventario','proveedores.nombre as proveedor')->get();
+        ->join('almacenes_zonas','almacenes_zonas.id','=','inventarios.id_almacen_zona')->join('almacenes', 'almacenes.id','=','almacenes_zonas.id_almacen')
+        ->where('inventarios.estado',1)->select('productos.id as producto','productos.nombre as nombre_producto','productos.cod_producto','almacenes_zonas.id as almacen_zona','almacenes_zonas.nombre as almacen_zona_nombre',
+        'almacenes.nombre as nombre_almacen','almacenes.id as almacen','cantidad_min as min','cantidad_max as max','inventarios.id as id_inventario','proveedores.nombre as proveedor')->get();
         return view('partials.inventarios')->with('inventarios',$inventarios);
     }
 
@@ -28,8 +28,9 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        $lastInsert = DetalleInventariosModel::select('cantidad_saldo','total_saldo')->orderBy('id','desc')->get();
-        return $lastInsert[0];
+        $promedioPonderado = DetalleInventariosModel::whereNotNull('cantidad_entrada')->select('cantidad_entrada','precio_unitario')->orderBy('id','DESC')->first();
+
+            return $promedioPonderado;
     }
 
     /**

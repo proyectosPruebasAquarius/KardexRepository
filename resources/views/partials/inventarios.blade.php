@@ -45,12 +45,13 @@
                 <div class="card-body">
 
                     <table class="table " id="table_id">
-                        <thead class=" table-responsive " >
+                        <thead class="" >
                             <tr>
                                 <th scope="col" class="text-start">Codigo del Producto</th>
                                 <th scope="col" class="text-start">Producto</th>
                                 <th scope="col" class="text-start">Proveedor</th>
                                 <th scope="col" class="text-start">Almacen</th>
+                                <th scope="col" class="text-start">Zona del Almacen</th>
                                 <th scope="col" class="text-center">Cantidad Maxima</th>
                                 <th scope="col" class="text-center">Cantidad Minima</th>
                                 <th scope="col" class="text-center">Acciones</th>
@@ -63,6 +64,7 @@
                                 <td class="text-start">{{ $i->nombre_producto }}</td>
                                 <td class="text-start">{{ $i->proveedor }}</td>
                                 <td class="text-start">{{ $i->nombre_almacen }}</td>
+                                <td class="text-start">{{ $i->almacen_zona_nombre }}</td>
                                 <td class="text-center">{{ $i->max }}</td>
                                 <td class="text-center">{{ $i->min }}</td>
                                 <td class="text-center">

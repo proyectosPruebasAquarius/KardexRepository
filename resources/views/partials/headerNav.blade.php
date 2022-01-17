@@ -70,6 +70,16 @@
                                 class="material-icons-two-tone">contacts</i></span><span
                             class="pc-mtext">Proveedores</span></a>
                 </li>
+                <li class="pc-item">
+                    <a href="/tipos-documentos" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">text_snippet</i></span><span
+                            class="pc-mtext">Tipos Documentos</span></a>
+                </li>
+                <li class="pc-item">
+                    <a href="/tiendas" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">text_snippet</i></span><span
+                            class="pc-mtext">Tiendas</span></a>
+                </li>
                 @auth
                 <li class="pc-item">
                     <a href="{{ route('usuarios') }}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">admin_panel_settings</i></span><span class="pc-mtext">Usuarios</span></a>

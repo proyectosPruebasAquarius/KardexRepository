@@ -10,7 +10,7 @@ class Inventario extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'id_producto',
-        'id_almacen',
+        'id_almacen_zona',
         'cantidad_max',
         'cantidad_min'
     ]; 

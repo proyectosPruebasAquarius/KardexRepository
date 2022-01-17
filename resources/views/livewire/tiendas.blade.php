@@ -1,5 +1,4 @@
-<div>    
-    <!-- Modal -->
+<div>
     <div id="exampleModalCenter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -18,7 +17,7 @@
                             <label for="nombre">Nombre</label>
                             @error('nombre') <span class="error">{{ $message }}</span> @enderror
                         </div>
-                        {{-- <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             <input type="text" class="form-control
                             @error('direccion')
                                 is-invalid
@@ -26,16 +25,32 @@
                             " id="direccion" placeholder="Dirección" wire:model="direccion">
                             <label for="direccion">Dirección</label>
                             @error('direccion') <span class="error">{{ $message }}</span> @enderror
-                        </div> --}}
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control
-                            @error('zonas')
-                                is-invalid
-                            @enderror
-                            " id="zonas" placeholder="Zonas" wire:model="zona" wire:key="focused">
-                            <label for="zonas">{{ $focused  ? 'Zonas | Separe con coma para agregar mas de una zona' : 'Zonas' }}</label>
-                            @error('zonas') <span class="error">{{ $message }}</span> @enderror
                         </div>
+
+                        <div class="form-floating mb-3">
+                            <select 
+                                id="almacen"
+                                wire:model="id_almacen" 
+                                class="form-control 
+                                @error('id_almacen')
+                                    is-invalid
+                                @enderror">
+                                @forelse ($almacenes as $alm)
+                                    @if ($loop->first)
+                                        <option style="display:none">Seleccione una opción</option>
+                                        
+                                        
+                                        
+                                    @endif
+                                    <option value="{{ $alm->value }}">{{ $alm->label }}</option>
+                                @empty
+                                    <option>Ocurrió un error, porfavor agregue nuevos almacenes</option>
+                                @endforelse
+                            </select>
+                            <label for="almacen">Almacen</label>
+                            @error('id_almacen') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+                            {{-- @livewire('tiendas-auto-complete') --}}                            
                     </form>                    
                 </div>
                 <div class="modal-footer">
@@ -48,26 +63,22 @@
     @push('scripts')
         <script>
             'use strict';
-
-            document.getElementById('zonas').addEventListener('focus', function () {
-                /* document.querySelector('label[for="zonas"]').innerText = 'Zonas | Separe con comas para agregar mas de una zona'; */
-                @this.focused = true;
-            })
-
-            document.getElementById('zonas').addEventListener('blur', function (e) {
-                if (e.target.value == '') {
-                    /* document.querySelector('label[for="zonas"]').innerText = 'Zonas'; */
-                    @this.focused = false;
-                }                
-            })
-
-            document.getElementById('zonas').addEventListener('keypress', function (e) {
-                console.log(e.which);
-                if (e.which === 32) {
-                    e.preventDefault()
+            /* let almacenes = @js($almacenes);
+            console.log(almacenes);
+            var datasrc = Array.from(almacenes)                                   
+            
+            const ac = new Autocomplete(document.getElementById('id_almacen'), {
+                data: datasrc,
+                onSelectItem: ({label, value}) => {
+                    @this.id_almacen = value
+                    @this.almacen = label
+                    console.log("user selected:", label, value);
                 }
-            })
+            });
+
+            let form = document.querySelector('#formA')
+            form.querySelector('.dropdown-menu') */
+            /* console.log(@js($errors->get('id_almacen'))) */;
         </script>
     @endpush
 </div>
-

@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/tiendas', 'TiendaController@index')->name('tiendas');
 
 Route::get('/login', function () {
     return view('auth.inicio-sesion');
@@ -48,3 +48,4 @@ Route::get('/categorias','CategoriaController@index');
 Route::get('/productos','ProductoController@index');
 Route::get('/inventarios','InventarioController@index');
 Route::get('/test','InventarioController@create');
+Route::get('/tipos-documentos','DocumentoController@index');

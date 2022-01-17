@@ -1,7 +1,7 @@
 @extends('index')
 
 
-@section('title','Listado de Marcas - Kardex')
+@section('title','Listado de Documentos - Kardex')
 
 
 @section('main-content')
@@ -12,11 +12,11 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Marcas</h5>
+                        <h5 class="m-b-10">Tipos de Documentos</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                        <li class="breadcrumb-item">Marcas</li>
+                        <li class="breadcrumb-item">Tipos de Documentos</li>
                     </ul>
                 </div>
             </div>
@@ -28,14 +28,14 @@
     <div class="col-xl-12 col-md-12 col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Listado de Marcas</h4>
+                <h4 class="card-title">Listado de Documentos</h4>
                 <div class="col-12 d-flex justify-content-end mt-3">
 
 
                     <!-- Button trigger modal -->
-                    @livewire('marca')
+                    @livewire('documentos')
                     <button type="button" class="btn  btn-primary" data-toggle="modal"
-                        data-target="#marcaModal">Agregar <span class="pc-micon"><i
+                        data-target="#tipoModal">Agregar <span class="pc-micon"><i
                                 class="material-icons-two-tone text-white">add</i></span></button>
                 </div>
             </div>
@@ -50,13 +50,13 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        @foreach ($marcas as $m)
+                        @foreach ($documentos as $d)
                         <tr>
-                            <td>{{ $m->nombre }}</td>
+                            <td>{{ $d->nombre }}</td>
                             <td>
                                 <a type="button"  data-toggle="modal"
-                                data-target="#marcaModal" onclick="Livewire.emit('asignMarca',@js($m) )"><i class="icon feather icon-edit f-16 text-success"></i></a>
-                                <a type="button" onclick="trash(@js($m->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                data-target="#tipoModal" onclick="Livewire.emit('asignTipo',@js($d) )"><i class="icon feather icon-edit f-16 text-success"></i></a>
+                                <a type="button" onclick="trash(@js($d->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -88,7 +88,7 @@
             cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.isConfirmed) {
-                Livewire.emit('dropByStateMarca', id)
+                Livewire.emit('dropByStateTipo', id)
             }
         })
     }

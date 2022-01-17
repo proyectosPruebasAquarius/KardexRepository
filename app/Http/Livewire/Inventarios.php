@@ -6,14 +6,17 @@ use Livewire\Component;
 use App\Inventario;
 use App\Producto;
 use App\Almacen;
+use App\AlmacenZona;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Inventarios extends Component
 {
     use LivewireAlert;
     public $productos = [];
     public $almacenes = [];
+    public $zonas = [];
     public $producto;
     public $almacen;
+    public $zona_almacen;
     public $min;
     public $max;
     public $id_inventario;
@@ -24,7 +27,7 @@ class Inventarios extends Component
         'max' => 'required|min:1',
         'producto' => 'required',
         'almacen' => 'required',
-        
+        'zona_almacen' => 'required',
     ];
     protected  $messages = [
         'min.required' => 'La Cantidad Minima es Obligatoria',
@@ -33,17 +36,17 @@ class Inventarios extends Component
         'max.min' => 'La Cantidad Maxima debe contener un Mímino de :min Caracteres', 
         'almacen.required' => 'El Almacen es Obligatorio',
         'producto.required' => 'El Producto es Obligatorio',
-       
+        'zona_almacen.required' => 'El Almacen es Obligatorio',
     ];
     public function asignInventario($inventario)
     {
         $this->id_inventario = $inventario['id_inventario'];
         $this->producto = $inventario['producto'];
+        $this->zona_almacen = $inventario['almacen_zona'];
         $this->almacen = $inventario['almacen'];
-
         $this->min = $inventario['min'];        
         $this->max = $inventario['max'];
-       
+        $this->zonas = AlmacenZona::where('estado',1)->where('id_almacen',$this->almacen)->select('nombre','id')->get();
         $this->almacenes = Almacen::where('estado',1)->select('nombre','id')->get();
         $this->productos = Producto::where('estado',1)->select('productos.cod_producto as nombre','id')->get();
     }
@@ -53,7 +56,7 @@ class Inventarios extends Component
     {
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->reset(['min','max','id_inventario','producto','almacen']);
+        $this->reset(['min','max','id_inventario','producto','almacen','zona_almacen']);
     }
     public function updated($propertyName)
     {
@@ -62,11 +65,12 @@ class Inventarios extends Component
 
     public function createInventario()
     {
+        $this->validate();
         if ($this->id_inventario) {
             try {                                
                 Inventario::where('id',$this->id_inventario)->update([
                     'id_producto' => $this->producto,
-                    'id_almacen' => $this->almacen,
+                    'id_almacen_zona' => $this->zona_almacen,
                     'cantidad_min' => $this->min,
                     'cantidad_max' => $this->max,
                    
@@ -83,7 +87,7 @@ class Inventarios extends Component
             try {
                 Inventario::create([
                     'id_producto' => $this->producto,
-                    'id_almacen' => $this->almacen,
+                    'id_almacen_zona' => $this->zona_almacen,
                     'cantidad_min' => $this->min,
                     'cantidad_max' => $this->max,
                 ]);
@@ -114,6 +118,10 @@ class Inventarios extends Component
 
     public function render()
     {
+        if(!empty($this->almacen)) {
+            $this->zonas = AlmacenZona::where('estado',1)->where('id_almacen',$this->almacen)->select('nombre','id')->get();
+        }
+       
         $this->almacenes = Almacen::where('estado',1)->select('nombre','id')->get();
         $this->productos = Producto::where('estado',1)->select('productos.cod_producto as nombre','id')->get();
         return view('livewire.inventarios');

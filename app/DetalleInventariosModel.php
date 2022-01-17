@@ -19,6 +19,7 @@ class DetalleInventariosModel extends Model
     'total_saldo',
     'total_entrada',
     'total_salida',
-    'fecha_registro'
+    'fecha_registro',
+    'id_documento'
 ]; 
 }

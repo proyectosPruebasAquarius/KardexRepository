@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Almacenes')
+@section('title', 'Tiendas')
 
 @section('main-content')
     
@@ -10,11 +10,11 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Almacenes</h5>
+                    <h5 class="m-b-10">Tiendas</h5>
                 </div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-                    <li class="breadcrumb-item">Almacenes</li>
+                    <li class="breadcrumb-item">Tiendas</li>
                 </ul>
             </div>
         </div>
@@ -25,7 +25,7 @@
 <div class="row">        
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Lista de Almacenes</h4>
+            <h4 class="card-title">Lista de Tiendas</h4>
                     
                 
             <div class="d-flex justify-content-end col-12 mt-3"><button class="btn btn-primary" type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar <i data-feather="plus"></i></button></div>
@@ -36,31 +36,23 @@
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>                           
-                            <th scope="col">Zonas</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Almacen</th>
                             <th scope="col" class="no-sort">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($data as $d)
-                        @php
-                            $almacenesZonas = \DB::table('almacenes_zonas')->where([
-                                ['id_almacen', '=', $d->id],
-                                ['estado', '=', 1]
-                            ])->get();
-                        @endphp
+                        @forelse ($tiendas as $d)
                         <tr class="text-left">                            
                             <td>{{ $d->nombre }}</td>
-                            <td>{{-- $d->direccion --}}
-                                @forelse ($almacenesZonas as $zona)
-                                    <span role="button" class="badge rounded-pill bg-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Click para editar" onclick="Livewire.emit('assignZonas', @js($zona))" data-toggle="modal" data-target="#modalZonas">
-                                        {{ $zona->nombre }}
-                                    </span>
-                                @empty
-                                    
-                                @endforelse
+                            <td>
+                                {{ $d->direccion }}
                             </td>  
+                            <td>
+                                {{ $d->almacen }}
+                            </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" onclick="Livewire.emit('assignAl', @js($d), @js($almacenesZonas))"><i class="icon feather icon-edit f-16 text-success text-center"></i></button>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" onclick="Livewire.emit('assignTi', @js($d))"><i class="icon feather icon-edit f-16 text-success text-center"></i></button>
                                 <button type="button" class="btn btn-default" onclick="trash(@js($d->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger text-center"></i></button>
                             </td>                          
                         </tr>   
@@ -72,8 +64,7 @@
             </div>
         </div>
     </div>
-    @livewire('almacenes')
-    @livewire('zonas')
+    @livewire('tiendas')
 </div>
 @endsection
 
@@ -81,13 +72,8 @@
 <script>
     var myModal = document.getElementById('exampleModalCenter')
     myModal.addEventListener('hide.bs.modal', function () {
-        Livewire.emit('resetData')
-    })
-
-    /* Livewire.on('listReload', function () {
-        var modal = new bootstrap.Modal(document.getElementById('exampleModalCenter'))
-        modal.hide();
-    }) */
+        Livewire.emit('resetDataTi')
+    })   
 
     let trash = (id) => {
         Swal.fire({
@@ -101,10 +87,14 @@
             cancelButtonText: 'Cancelar'
             }).then((result) => {
             if (result.isConfirmed) {
-                Livewire.emit('dropByState', id)
+                Livewire.emit('deleteTienda', id)
             }
         })
     }
+
+    window.addEventListener('close-modal', event => {
+        $("#exampleModalCenter").modal('hide');     
+    });
 </script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
