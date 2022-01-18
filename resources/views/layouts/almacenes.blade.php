@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Almacenes')
+@section('title', 'Listado de Almacenes - Kardex')
 
 @section('main-content')
     
@@ -32,12 +32,12 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table text-center" id="table">                    
+                <table class="table" id="table">                    
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>                           
-                            <th scope="col">Zonas</th>
-                            <th scope="col" class="no-sort">Acciones</th>
+                            <th scope="col" class="text-start">Nombre</th>                           
+                            <th scope="col" class="text-start">Zonas</th>
+                            <th scope="col" class="no-sort text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,9 +48,9 @@
                                 ['estado', '=', 1]
                             ])->get();
                         @endphp
-                        <tr class="text-left">                            
-                            <td>{{ $d->nombre }}</td>
-                            <td>{{-- $d->direccion --}}
+                        <tr >                            
+                            <td class="text-start">{{ $d->nombre }}</td>
+                            <td class="text-start">{{-- $d->direccion --}}
                                 @forelse ($almacenesZonas as $zona)
                                     <span role="button" class="badge rounded-pill bg-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Click para editar" onclick="Livewire.emit('assignZonas', @js($zona))" data-toggle="modal" data-target="#modalZonas">
                                         {{ $zona->nombre }}

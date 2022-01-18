@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Inicio')
+@section('title', 'Inicio - Kardex')
 
 @section('main-content')
     @livewire('home')

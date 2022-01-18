@@ -1,7 +1,7 @@
 @extends('index')
 
 
-@section('title','Listado de Iventarios - Kardex')
+@section('title','Listado de Inventarios - Kardex')
 
 
 @section('main-content')

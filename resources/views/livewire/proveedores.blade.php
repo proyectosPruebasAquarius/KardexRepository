@@ -8,22 +8,22 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table text-center" id="table">                    
+                <table class="table" id="table">                    
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>                           
-                            <th scope="col">Dirección</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col" class="text-start">Nombre</th>                           
+                            <th scope="col" class="text-start">Dirección</th>
+                            <th scope="col" class="text-start">Teléfono</th>
+                            <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($data as $d)
                         <tr>                            
-                            <td>{{ $d->nombre }}</td>
-                            <td>{{ $d->direccion }}</td> 
-                            <td>{{ $d->telefono }}</td>  
-                            <td>
+                            <td class="text-start">{{ $d->nombre }}</td>
+                            <td class="text-start"> {{ $d->direccion }}</td> 
+                            <td class="text-start">{{ $d->telefono }}</td>  
+                            <td class="text-center">
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" wire:click="$emit('assign', {{ $d }})"><i class="icon feather icon-edit f-16 text-success text-center"></i></button>
                                 <button type="button" class="btn btn-default" onclick="trash(@js($d->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger text-center"></i></button>
                             </td>                          

@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Usuarios')
+@section('title', 'Listado de Usuarios - Kardex')
 
 @section('main-content')
     

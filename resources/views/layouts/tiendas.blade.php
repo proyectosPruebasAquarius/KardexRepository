@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Tiendas')
+@section('title', 'Listado de Tiendas - Kardex')
 
 @section('main-content')
     
@@ -32,23 +32,23 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table text-center" id="table">                    
+                <table class="table " id="table">                    
                     <thead>
                         <tr>
-                            <th scope="col">Nombre</th>                           
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Almacen</th>
-                            <th scope="col" class="no-sort">Acciones</th>
+                            <th scope="col" class="text-start">Nombre</th>                           
+                            <th scope="col" class="text-start">Direccion</th>
+                            <th scope="col" class="text-start">Almacen</th>
+                            <th scope="col" class="no-sort text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($tiendas as $d)
-                        <tr class="text-left">                            
-                            <td>{{ $d->nombre }}</td>
-                            <td>
+                        <tr >                            
+                            <td class="text-start">{{ $d->nombre }}</td>
+                            <td class="text-start">
                                 {{ $d->direccion }}
                             </td>  
-                            <td>
+                            <td class="text-start">
                                 {{ $d->almacen }}
                             </td>
                             <td class="text-center">

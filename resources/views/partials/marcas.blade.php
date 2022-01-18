@@ -42,7 +42,7 @@
             <div class="card-body">
 
                 <table class="table" id="table_id">
-                    <thead class=" bg-secondary text-white">
+                    <thead >
                         <tr>
                           
                             <th scope="col " class="text-start">Nombre</th>
