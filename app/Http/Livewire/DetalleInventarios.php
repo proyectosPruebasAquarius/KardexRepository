@@ -8,6 +8,10 @@ use App\Documento;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\ProductStock;
+use App\User;
+use Notification;
+
 class DetalleInventarios extends Component
 {
     use LivewireAlert;
@@ -55,6 +59,7 @@ class DetalleInventarios extends Component
     {
         $this->validateOnly($propertyName);
     }
+
 
     public function asignDetalleInventario($inventario)
     {
@@ -182,6 +187,32 @@ class DetalleInventarios extends Component
 
                 session(['alert' => ['type' => 'success', 'message' => 'Inventario Guardado con éxito.','position' =>'center']]);
                 $this->dispatchBrowserEvent('closeModal');
+                $users = User::get();
+               
+                $cod = DB::table('inventarios')->join('productos', 'inventarios.id_producto', '=', 'productos.id')->where('inventarios.id', $this->id_inventario)->value('productos.cod_producto');
+                $stockMin = DB::table('inventarios')->where('id', $this->id_inventario)->value('cantidad_min');
+                $details = $this->origen == 'Entrada' 
+                ? 
+                [
+                    'message_title' => 'Ha Ocurrido una Nueva Entrada '.$cod,
+                    'message_body' => 'Se ha relizado un cambio en inventarios, concepto Entrada'
+                ]
+                :
+                [
+                    'message_title' => 'Ha Ocurrido una Nueva Salida '.$cod,
+                    'message_body' => 'Se ha relizado un cambio en inventarios, concepto Salida'
+                ];
+
+                if ($saveDetalle->cantidad_saldo <= $stockMin) {
+                    $newDetail = [
+                        'message_title' => 'Cantidad minima de inventario igual o menor '.$cod,
+                        'message_body' => 'Se ha alcanzado o disminuido el minimo de inventario de producto'
+                    ];
+                    Notification::send($users, new ProductStock($newDetail));
+                }
+                Notification::send($users, new ProductStock($details));
+                /* $this->emit('reloadN'); */
+
                 return redirect()->to('/inventarios');
             }
                    
