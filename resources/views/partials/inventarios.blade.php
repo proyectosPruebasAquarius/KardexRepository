@@ -44,7 +44,7 @@
                 </div>
                 <div class="card-body">
 
-                    <table class="table " id="table_id">
+                    <table class="table" id="table_id">
                         <thead class="" >
                             <tr>
                                 <th scope="col" class="text-start">Codigo del Producto</th>
@@ -70,17 +70,17 @@
                                 <td class="text-center">
                                     <a type="button" data-toggle="modal" data-target="#inventarioModal"
                                         onclick="Livewire.emit('asignInventario',@js($i) )"><i
-                                            class="icon feather icon-edit f-16 text-success"></i></a>
-                                    <a type="button" onclick="trash(@js($i->id_inventario))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                            class="icon feather icon-edit f-16 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"></i></a>
+                                    <a type="button" onclick="trash(@js($i->id_inventario))"><i class="feather icon-trash-2 ml-3 f-16 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar"></i></a>
                                     <a type="button" data-toggle="modal" data-target="#detalleInventarioModal"
-                                    onclick="Livewire.emit('asignDetalleInventario',@js($i) )" ><i class="feather icon-file-plus ml-3 f-16 text-info"></i></a>
+                                    onclick="Livewire.emit('asignDetalleInventario',@js($i) )" ><i class="feather icon-file-plus ml-3 f-16 text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar nuevo detalle"></i></a>
                                     <a type="button" data-toggle="modal" data-target="#historialModal"
-                                    onclick="Livewire.emit('asignDetalle',@js($i) )" ><i class="feather icon-external-link ml-3 f-16 text-secondary"></i></a>
+                                    onclick="Livewire.emit('asignDetalle',@js($i) )" ><i class="feather icon-external-link ml-3 f-16 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalle de Inventario"></i></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table >
                 </div>
             </div>
         </div>
