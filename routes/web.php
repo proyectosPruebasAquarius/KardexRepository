@@ -38,7 +38,7 @@ Route::get('/proveedores', function () {
 
 Route::get('/usuarios', 'UserController@index')->name('usuarios')->middleware('auth');
 
-
+Route::get('/pedidos', 'PedidoController@index')->name('pedidos');
 
 
 

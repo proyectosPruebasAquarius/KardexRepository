@@ -15,7 +15,11 @@
         </div>
     
         @forelse ($notifications as $notify)
+        @if(isset($notify->data['message_body']['type']))
+        <a type="button" class="dropdown-item" {{-- wire:click="redirection(@js($notify->id))" --}} onclick="openModalSoU(@js($notify->data['message_body']['id_pedido']))">
+        @else
         <a type="button" class="dropdown-item" wire:click="redirection(@js($notify->id))">
+        @endif
             <i class="material-icons-two-tone">mark_email_unread</i>
             <span>{{ $notify->data['message_title'] }}</span>
         </a>
@@ -44,6 +48,12 @@
                     minScrollbarLength: 20
                 });
             }())
+
+            let openModalSoU = (id) => {
+                Livewire.emit('assignValuePedidos', id);
+                var mdlPedidos = new bootstrap.Modal(document.getElementById('pedidosModal'));
+                mdlPedidos.show();
+            }
         </script>
     @endpush
 </div>

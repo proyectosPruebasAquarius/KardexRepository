@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Notifications\ProductStock;
 use App\User;
 use Notification;
+use App\Pedido;
 
 class DetalleInventarios extends Component
 {
@@ -151,6 +152,7 @@ class DetalleInventarios extends Component
                
                 $cod = DB::table('inventarios')->join('productos', 'inventarios.id_producto', '=', 'productos.id')->where('inventarios.id', $this->id_inventario)->value('productos.cod_producto');
                 $stockMin = DB::table('inventarios')->where('id', $this->id_inventario)->value('cantidad_min');
+                $id_pForP = DB::table('inventarios')->join('productos', 'inventarios.id_producto', '=', 'productos.id')->where('inventarios.id', $this->id_inventario)->value('productos.id');
                 $details = $this->origen == 'Entrada' 
                 ? 
                 [
@@ -163,15 +165,21 @@ class DetalleInventarios extends Component
                     'message_body' => 'Se ha relizado un cambio en inventarios, concepto Salida'
                 ];
 
+                $pdido = new Pedido;
+                $pdido->id_producto = $id_pForP;
+                $pdido->save();
+
                 if ($saveDetalle->cantidad_saldo <= $stockMin) {
                     $newDetail = [
                         'message_title' => 'Cantidad minima de inventario igual o menor '.$cod,
-                        'message_body' => 'Se ha alcanzado o disminuido el minimo de inventario de producto'
+                        'message_body' => [
+                            'type' => 'min', 
+                        'id_pedido' => $pdido->id, 
+                        'cod' => $cod],                        
                     ];
                     Notification::send($users, new ProductStock($newDetail));
                 }
                 Notification::send($users, new ProductStock($details));
-                /* $this->emit('reloadN'); */
 
                 return redirect()->to('/inventarios');
             }

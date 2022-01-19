@@ -47,6 +47,7 @@
     <div class="pcoded-content">
         @yield('main-content')
         <!-- [ Main Content ] end -->
+        @livewire('pedidos-modal')
     </div>
 </div>
 <!-- [ Main Content ] end -->
