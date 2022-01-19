@@ -24215,7 +24215,8 @@ new-task label input[type=checkbox] {
     border-color: #7267EF;
 }
 
-.tooltip-inner {
+
+/*.tooltip-inner {
     background-color: #2f4fff;
     box-shadow: 0px 0px 4px black;
     opacity: 1 !important;
@@ -24235,7 +24236,7 @@ new-task label input[type=checkbox] {
 
 .tooltip.bs-tooltip-top .tooltip-arrow::before {
     border-top-color: #2f4fff !important;
-}
+}*/
 
 .buttonD {
     --background: #2B3044;

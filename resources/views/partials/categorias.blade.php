@@ -56,8 +56,8 @@
                             <td class="text-start" >{{ $c->nombre }}</td>
                             <td  class="text-center">
                                 <a type="button"  data-toggle="modal"
-                                data-target="#categoriaModal" onclick="Livewire.emit('asignCategoria',@js($c) )" ><i class="icon feather icon-edit f-16 text-success"></i></a>
-                                <a type="button" onclick="trash(@js($c->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                data-target="#categoriaModal" onclick="Livewire.emit('asignCategoria',@js($c) )" ><i class="icon feather icon-edit f-16 text-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"></i></a>
+                                <a type="button" onclick="trash(@js($c->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar"></i></a>
                             </td>
                         </tr>
                         @endforeach
