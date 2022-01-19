@@ -30,7 +30,7 @@ class HistorialInventario extends Component
 
         $this->detalle = DetalleInventariosModel::join('documentos','documentos.id','=','detalles_inventarios.id_documento')->join('tipos_documentos','tipos_documentos.id','=','documentos.id_tipo_documento')
         ->select('precio_unitario','concepto','cantidad_saldo','cantidad_entrada','cantidad_salida','total_saldo','total_entrada','total_salida','fecha_registro','tipos_documentos.nombre as tipo_documento',
-        'documentos.factura','documentos.factura_proveedor')
+        'documentos.factura','documentos.factura_proveedor','detalles_inventarios.precio_unitario_proveedor')
         ->where('id_inventario',$this->id_inventario)->orderBy('detalles_inventarios.id','ASC')->get();
 
         return view('livewire.historial-inventario');

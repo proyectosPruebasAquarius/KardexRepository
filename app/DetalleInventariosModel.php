@@ -20,6 +20,7 @@ class DetalleInventariosModel extends Model
     'total_entrada',
     'total_salida',
     'fecha_registro',
-    'id_documento'
+    'id_documento',
+    'precio_unitario_proveedor'
 ]; 
 }

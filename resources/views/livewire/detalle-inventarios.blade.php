@@ -13,6 +13,21 @@
                     </div>
                     <div class="modal-body">
                         <form wire:submit.prevent="createDetalleInventario" id="detalleInventarioForm">
+                             <!--FECHA REGISTRO-->
+                             <div class="form-floating mb-3">
+                                <input type="date" class="form-control 
+                        @error('fecha_registro')
+                            is-invalid
+                        @enderror
+                        " id="fecha_registro" placeholder="Selecione la fecha" wire:model="fecha_registro">
+                                <label for="fecha_registro">Fecha</label>
+                                @error('fecha_registro') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="form-floating mb-3">
+
+                                <input type="hidden" class="form-control" wire:model="id_inventario">
+                            </div>
                             <!--CONCEPTO-->
                             <div class="form-floating mb-3">
 
@@ -106,21 +121,7 @@
 
 
 
-                            <!--FECHA REGISTRO-->
-                            <div class="form-floating mb-3">
-                                <input type="date" class="form-control 
-                        @error('fecha_registro')
-                            is-invalid
-                        @enderror
-                        " id="fecha_registro" placeholder="Selecione la fecha" wire:model="fecha_registro">
-                                <label for="fecha_registro">Fecha</label>
-                                @error('fecha_registro') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-
-                            <div class="form-floating mb-3">
-
-                                <input type="hidden" class="form-control" wire:model="id_inventario">
-                            </div>
+                           
 
 
 

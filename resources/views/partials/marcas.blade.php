@@ -54,9 +54,9 @@
                         <tr>
                             <td class="text-start">{{ $m->nombre }}</td>
                             <td class="text-center">
-                                <a type="button"  data-toggle="modal"
+                                <a type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"  data-toggle="modal"
                                 data-target="#marcaModal" onclick="Livewire.emit('asignMarca',@js($m) )"><i class="icon feather icon-edit f-16 text-success"></i></a>
-                                <a type="button" onclick="trash(@js($m->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a>
+                                <a type="button" onclick="trash(@js($m->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger"  data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"></i></a>
                             </td>
                         </tr>
                         @endforeach

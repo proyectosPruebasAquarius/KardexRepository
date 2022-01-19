@@ -128,11 +128,23 @@
                                         </td>
                                       
                                         <td>
+                                            @if ($d->precio_unitario_proveedor == null)
                                             @if ($d->total_entrada == null)
 
+                                                @else
+                                                $ {{ $d->precio_unitario }}
+                                                @endif  
                                             @else
-                                            $ {{ $d->precio_unitario }}
-                                            @endif    
+                                                Provedor: $ {{ $d->precio_unitario_proveedor }}
+                                               
+                                                <br>
+                                                @if ($d->total_entrada == null)
+
+                                                @else
+                                                Pomedio P: $ {{ $d->precio_unitario }}
+                                                @endif  
+                                            @endif
+                                             
                                             
                                             
                                         </td>
@@ -187,7 +199,10 @@
             </div>
         </div>
     </div>
+
+  
     @push('scripts')
+    
     <script>
         let modalDetalle = document.getElementById('historialModal');
     
@@ -200,9 +215,9 @@
               
               
             });
-    
+            
          
-    
+            
     </script>
     @endpush
 

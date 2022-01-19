@@ -19,9 +19,7 @@ class DetalleInventarios extends Component
     public $concepto;
     public $cantidad;
     public $tipo_documento;
- 
     public $precio_unitario;
-
     public $fecha_registro;
     public $origen;
     public $factura;
@@ -128,63 +126,25 @@ class DetalleInventarios extends Component
                         $saveDetalle->id_documento = $documento->id;
                         $total_promedio = $promedioPonderado->cantidad_entrada * $promedioPonderado->precio_unitario +  $this->precio_unitario * $this->cantidad;  
                         $cantidad_promedio = $promedioPonderado->cantidad_entrada + $this->cantidad;
+                        $saveDetalle->precio_unitario_proveedor = $this->precio_unitario;
                         $saveDetalle->precio_unitario =  round($total_promedio / $cantidad_promedio,2);
                         $saveDetalle->total_saldo =   round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo,2);
-                        $saveDetalle->total_entrada = round($saveDetalle->precio_unitario * $this->cantidad,2);                               
+                        $saveDetalle->total_entrada = round($this->precio_unitario * $this->cantidad,2);                               
                         $saveDetalle->save();
                         DB::commit();
                     }                                      
                 } else {
                     $saveDetalle->cantidad_salida = $this->cantidad;
-                    $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo - $this->cantidad;
-                   
-                   
-                    $saveDetalle->id_documento = $documento->id;
-                    $total_promedio = $promedioPonderado->cantidad_entrada * $promedioPonderado->precio_unitario +  $this->precio_unitario * $this->cantidad;  
-                    $cantidad_promedio = $promedioPonderado->cantidad_entrada + $this->cantidad;
-                    $saveDetalle->precio_unitario =  round($total_promedio / $cantidad_promedio,2);
+                    $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo - $this->cantidad;                                      
+                    $saveDetalle->id_documento = $documento->id;                  
+                    $saveDetalle->precio_unitario =  $promedioPonderado->precio_unitario;
                     $saveDetalle->total_salida = round($saveDetalle->precio_unitario * $this->cantidad,2);
                     $saveDetalle->total_saldo =  round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo,2);
                     $saveDetalle->save();
                     DB::commit();
 
-                    /*$saveDetalle->cantidad_salida = $this->cantidad;                                                
-                    $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo - $this->cantidad;                                                                  
-                    $saveDetalle->id_documento = $documento->id;
-                    $total_promedio = $promedioPonderado->cantidad_entrada * $promedioPonderado->precio_unitario   $this->precio_unitario * $this->cantidad;  
-                    $cantidad_promedio = $promedioPonderado->cantidad_entrada + $this->cantidad;
-                    $saveDetalle->precio_unitario =  round($total_promedio / $cantidad_promedio,2);
-                    $saveDetalle->total_saldo =   round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo,2);
-                    $saveDetalle->total_salida = round($saveDetalle->precio_unitario * $this->cantidad,2);                               
-                    $saveDetalle->save();*/
-                    DB::commit();
-                }
-                
-
-
-
-
-               /* if ($this->cantidad_entrada !== null && sizeof($lastInsert) == 0) {
-                    $saveDetalle->cantidad_entrada = $this->cantidad_entrada;
-                    $saveDetalle->total_entrada = $this->precio_unitario * $this->cantidad_entrada;
-                    $saveDetalle->total_saldo = $this->precio_unitario * $this->cantidad_entrada;
-                    $saveDetalle->cantidad_saldo = $this->cantidad_entrada;
-                }else {
-                    if ($this->cantidad_entrada !== null) {
-                        $saveDetalle->cantidad_entrada = $this->cantidad_entrada;
-                        $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo + $this->cantidad_entrada;
-                        $saveDetalle->total_entrada = $this->precio_unitario * $this->cantidad_entrada;
-                        $saveDetalle->total_saldo =  $lastInsert[0]->total_saldo + $this->precio_unitario * $this->cantidad_entrada;
-                    }else {
-                        $saveDetalle->cantidad_salida = $this->cantidad_salida;
-                        $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo - $this->cantidad_salida;
-                        $saveDetalle->total_salida = $this->precio_unitario * $this->cantidad_salida;
-                        $saveDetalle->total_saldo =  $lastInsert[0]->total_saldo - $this->precio_unitario * $this->cantidad_salida;
-                    }
-                }  */  
-               
-               
-
+                    
+                }                            
                 session(['alert' => ['type' => 'success', 'message' => 'Inventario Guardado con éxito.','position' =>'center']]);
                 $this->dispatchBrowserEvent('closeModal');
                 $users = User::get();
