@@ -86,6 +86,11 @@
                                 class="material-icons-two-tone">store</i></span><span
                             class="pc-mtext">Tiendas</span></a>
                 </li>
+                <li class="pc-item">
+                    <a href="{{ route('pedidos') }}" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">account_balance_wallet</i></span><span
+                            class="pc-mtext">Pedidos </span></a>
+                </li>
                 @auth
                 <li class="pc-item">
                     <a href="{{ route('usuarios') }}" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">admin_panel_settings</i></span><span class="pc-mtext">Usuarios</span></a>
