@@ -19,8 +19,9 @@ class PedidosModal extends Component
     public $cod_producto;
     public $estado = 1;
     public $currentUrl;
+    public $isState = false;    
 
-    protected $listeners = ['resetVFPedidos' => 'resetValidationAndInputs', 'assignValuePedidos' => 'assignValues', 'destroyPdido' => 'trash'];
+    protected $listeners = ['resetVFPedidos' => 'resetValidationAndInputs', 'assignValuePedidos' => 'assignValues', 'destroyPdido' => 'trash', 'edidStateM' => 'edidState', 'notifyId' => 'notifyId'];
 
     protected $rules = [
         'precio' => ['required', 'numeric'],
@@ -78,7 +79,7 @@ class PedidosModal extends Component
         $this->resetErrorBag();
 
         $this->resetValidation();
-        $this->reset(['precio', 'cantidad', 'id_pedido', 'producto']);
+        $this->reset(['precio', 'cantidad', 'id_pedido', 'producto', 'isState']);
     }
 
     public function assignValues($id)
@@ -91,6 +92,21 @@ class PedidosModal extends Component
         $this->proveedor = $value->proveedor;
         $this->proveedor_tel = $value->telefono;
         $this->cod_producto = $value->cod_producto;
+        $this->precio = $value->precio;
+        $this->cantidad = $value->cantidad;
+        if ($this->isState) {
+            $this->estado = $value->estado;
+        } elseif ($value->estado > 0) {
+            $this->estado = $value->estado;
+        }else {
+            $this->estado = 1;
+        }
+    }
+
+    public function edidState($id, $state) 
+    {
+        $this->isState = $state;
+        $this->assignValues($id);         
     }
 
     public function trash($id)
@@ -111,9 +127,15 @@ class PedidosModal extends Component
         }
     }
     
+    public function notifyId($id)
+    {
+        \DB::table('notifications')->where('id', $id)->update(['read_at' => now()]);
+        $this->emit('reloadN');
+    }
+
     public function mount()
     {
-        $this->currentUrl = request()->route()->getName();;
+        $this->currentUrl = request()->route()->getName();
     }
 
     public function render()

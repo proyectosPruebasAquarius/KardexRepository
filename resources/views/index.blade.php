@@ -43,7 +43,12 @@
 	@include('partials.headerNav')
 
 <!-- [ Main Content ] start -->
-<div class="pc-container">
+
+<div class="pc-container @if (session()->exists('expandedSide'))
+    @if (session('expandedSide'))
+        margin-container
+    @endif
+@endif">
     <div class="pcoded-content">
         @yield('main-content')
         <!-- [ Main Content ] end -->

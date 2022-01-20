@@ -5,7 +5,13 @@
 @section('main-content')
     
 <!-- [ breadcrumb ] start -->
-<div class="page-header">
+<div class="page-header 
+@if (session()->exists('expandedSide'))
+    @if (session('expandedSide'))
+    expand-with-items
+    @endif
+@endif
+">
     <div class="page-block">
         <div class="row align-items-center">
             <div class="col-md-12">
@@ -55,11 +61,11 @@
                                 {{ $d->proveedor. ' - '. $d->telefono  }}
                             </td>  
                             @if ($d->estado == 1)
-                                <td class="text-start"><span class="badge rounded-pill bg-warning text-dark">{{ __('Pendiente') }}</span></td>
+                                <td class="text-start"><span class="badge rounded-pill bg-warning text-dark" style="cursor: pointer" ondblclick="Livewire.emit('edidStateM', @js($d->id), @js($d->estado)); new bootstrap.Modal(document.getElementById('pedidosModal')).show();" data-bs-toggle="tooltip" data-bs-placement="top" title="Doble click para editar">{{ __('Pendiente') }}</span></td>
                             @elseif($d->estado == 2)
-                                <td class="text-start"><span class="badge rounded-pill bg-success">{{ __('Finalizado') }}</span></td>
+                                <td class="text-start"><span class="badge rounded-pill bg-success" style="cursor: pointer" ondblclick="Livewire.emit('edidStateM', @js($d->id), @js($d->estado)); new bootstrap.Modal(document.getElementById('pedidosModal')).show();" data-bs-toggle="tooltip" data-bs-placement="top" title="Doble click para editar">{{ __('Finalizado') }}</span></td>
                             @else
-                                <td class="text-start"><span class="badge rounded-pill bg-danger">{{ __('No enviado') }}</span></td>
+                                <td class="text-start"><span class="badge rounded-pill bg-danger" style="cursor: pointer" ondblclick="Livewire.emit('edidStateM', @js($d->id), @js($d->estado)); new bootstrap.Modal(document.getElementById('pedidosModal')).show();" data-bs-toggle="tooltip" data-bs-placement="top" title="Doble click para editar">{{ __('No enviado') }}</span></td>
                             @endif
                             <td class="text-center">
                                 {{-- La funcion llamada aqui, se encuentra en Notifications Livewire --}}

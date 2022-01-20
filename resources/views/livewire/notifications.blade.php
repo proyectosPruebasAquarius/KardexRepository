@@ -1,6 +1,6 @@
 <div>
     <a class="pc-head-link dropdown-toggle arrow-none mr-0 position-relative" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-        <i data-feather="bell"></i>
+        <i class="feather icon-bell"></i>
         @if($notifications)
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ count($notifications) }}
@@ -16,7 +16,7 @@
     
         @forelse ($notifications as $notify)
         @if(isset($notify->data['message_body']['type']))
-        <a type="button" class="dropdown-item" {{-- wire:click="redirection(@js($notify->id))" --}} onclick="openModalSoU(@js($notify->data['message_body']['id_pedido']))">
+        <a type="button" class="dropdown-item" {{-- wire:click="redirection(@js($notify->id))" --}} onclick="openModalSoU(@js($notify->data['message_body']['id_pedido'])); assignNotifyId(@js($notify->id))">
         @else
         <a type="button" class="dropdown-item" wire:click="redirection(@js($notify->id))">
         @endif
@@ -53,6 +53,10 @@
                 Livewire.emit('assignValuePedidos', id);
                 var mdlPedidos = new bootstrap.Modal(document.getElementById('pedidosModal'));
                 mdlPedidos.show();
+            }
+
+            let assignNotifyId = (id) => {
+                Livewire.emit('notifyId', id);
             }
         </script>
     @endpush

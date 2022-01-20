@@ -4,11 +4,29 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="pedidosModalLabel">Realizar Pedido</h5>
+                    <h5 class="modal-title" id="pedidosModalLabel">{{ $isState ? 'Estado del ' : 'Realizar ' }}Pedido</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" wire:submit.prevent="createElement" id="pFModal">
+                        @if($isState)
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-control
+                                        @error('estado')
+                                            is-invalid
+                                        @enderror
+                                        " id="stateSelect" wire:model="estado">
+                                        <option value="1">Pendiente</option>
+                                        <option value="2">Finalizado</option>
+                                        </select>
+                                        <label for="stateSelect">estado</label>
+                                        @error('estado') <span class="error">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        @else
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-floating mb-3">
@@ -27,8 +45,8 @@
                                     @error('cod_producto')
                                         is-invalid
                                     @enderror
-                                    " id="nameInput" placeholder="product name" wire:model="cod_producto" readonly>
-                                    <label for="nameInput">Código de Producto</label>
+                                    " id="codInput" placeholder="product name" wire:model="cod_producto" readonly>
+                                    <label for="codInput">Código de Producto</label>
                                     @error('cod_producto') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -66,8 +84,8 @@
                                     @error('proveedor')
                                         is-invalid
                                     @enderror
-                                    " id="nameInput" placeholder="product name" wire:model="proveedor" readonly>
-                                    <label for="nameInput">Proveedor</label>
+                                    " id="prvInput" placeholder="product name" wire:model="proveedor" readonly>
+                                    <label for="prvInput">Proveedor</label>
                                     @error('proveedor') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -77,12 +95,14 @@
                                     @error('proveedor_tel')
                                         is-invalid
                                     @enderror
-                                    " id="nameInput" placeholder="product name" wire:model="proveedor_tel" readonly>
-                                    <label for="nameInput">Teléfono</label>
+                                    " id="prvTInput" placeholder="product name" wire:model="proveedor_tel" readonly>
+                                    <label for="prvTInput">Teléfono</label>
                                     @error('proveedor_tel') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        
                     </form>
                     {{-- <div class="row">
                         <div class="col">
