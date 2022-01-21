@@ -152,8 +152,11 @@ class DetalleInventarios extends Component
                     if (sizeof($lastInsert) == 0) {
                         $saveDetalle->cantidad_entrada = $this->cantidad;
                         $saveDetalle->total_entrada = round($this->precio_unitario * $this->cantidad, 3);
+                        $saveDetalle->total_entrada = bcdiv($saveDetalle->total_entrada,'1',2);
+
                         $saveDetalle->cantidad_saldo = $this->cantidad;
                         $saveDetalle->total_saldo = round($this->precio_unitario * $this->cantidad, 3);
+                        $saveDetalle->total_saldo =  bcdiv($saveDetalle->total_saldo,'1',2);
                         $saveDetalle->id_documento = $documento->id;
                         $saveDetalle->precio_unitario = $this->precio_unitario;
                        
@@ -170,8 +173,13 @@ class DetalleInventarios extends Component
                         $saveDetalle->precio_unitario_proveedor = $this->precio_unitario;
 
                         $saveDetalle->precio_unitario = round($total_promedio / $cantidad_promedio, 3);
+                        $saveDetalle->precio_unitario = bcdiv($saveDetalle->precio_unitario,'1',2);
+
                         $saveDetalle->total_saldo = round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo, 3);
+                        $saveDetalle->total_saldo = bcdiv($saveDetalle->total_saldo,'1',2);
+
                         $saveDetalle->total_entrada = round($this->precio_unitario * $this->cantidad, 3);
+                        $saveDetalle->total_entrada = bcdiv($saveDetalle->total_entrada,'1',2);
                         $saveDetalle->save();
                         DB::commit();
                     }
@@ -180,8 +188,12 @@ class DetalleInventarios extends Component
                     $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo - $this->cantidad;
                     $saveDetalle->id_documento = $documento->id;
                     $saveDetalle->precio_unitario = $promedioPonderado->precio_unitario;
+
                     $saveDetalle->total_salida = round($saveDetalle->precio_unitario * $this->cantidad, 3);
+                    $saveDetalle->total_salida = bcdiv($saveDetalle->total_salida,'1',2);
+
                     $saveDetalle->total_saldo = round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo, 3);
+                    $saveDetalle->total_saldo = bcdiv($saveDetalle->total_saldo,'1',2);
                     $saveDetalle->save();
                     DB::commit();
 
@@ -189,15 +201,22 @@ class DetalleInventarios extends Component
 
                     $saveDetalle->cantidad_entrada = $this->cantidad;
                     $saveDetalle->total_entrada = round($this->precio_unitario * $this->cantidad, 3);
+                    $saveDetalle->total_entrada = bcdiv($saveDetalle->total_entrada,'1',2);
+
 
                     $total_promedio = $lastInsert[0]->total_saldo - $this->precio_unitario * $this->cantidad;
                     $cantidad_promedio = $lastInsert[0]->cantidad_saldo - $this->cantidad;
                     $saveDetalle->precio_unitario = round($total_promedio / $cantidad_promedio, 3);
+                    $saveDetalle->precio_unitario = bcdiv($saveDetalle->precio_unitario,'1',2);
+
+
                     $saveDetalle->origen = 1;
                     $saveDetalle->precio_unitario_proveedor = $this->precio_unitario;
                     $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo - $this->cantidad;
-                    $saveDetalle->total_saldo = round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo, 3);
-
+                    $saveDetalle->total_saldo = round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo,3);
+                    $saveDetalle->total_saldo = bcdiv($saveDetalle->total_saldo,'1',2);
+                    
+                    
                     $saveDetalle->save();
                     DB::commit();
                 } elseif ($this->origen == 'DevVenta') {
@@ -210,9 +229,11 @@ class DetalleInventarios extends Component
                     $total_promedio = $lastInsert[0]->total_saldo + $precio_unitario_last->precio_unitario * $this->cantidad;
                     $cantidad_promedio = $lastInsert[0]->cantidad_saldo + $this->cantidad;
                     $saveDetalle->precio_unitario = round($total_promedio / $cantidad_promedio, 3);
+                    $saveDetalle->precio_unitario = bcdiv($saveDetalle->precio_unitario,'1',2);
                     $saveDetalle->origen = 2;
                     $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo + $this->cantidad;
                     $saveDetalle->total_saldo = round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo, 3);
+                    $saveDetalle->total_saldo = bcdiv($saveDetalle->total_saldo,'1',2);
 
                     $saveDetalle->save();
                     DB::commit();

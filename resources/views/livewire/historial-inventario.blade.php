@@ -156,7 +156,7 @@
                                         <td scope="col" colspan="1">
                                             {{ $d->concepto }}
                                         </td>
-                                        @if ($d->origen == 1 )
+                                        @if ($d->origen == 1 || $d->origen == 2)
                                             <td>
 
                                             </td>
@@ -167,7 +167,7 @@
                                         </td>
                                         @endif
                                         
-                                        <td>$ {{ $d->precio_unitario }}</td>
+                                        <td>$ {{ number_format($d->precio_unitario,2) }}</td>
 
                                         @if ($d->origen == 1)
                                         <td class="text-danger">
@@ -194,7 +194,7 @@
                                             @if ($d->total_entrada == null)
 
                                             @else
-                                            ($ {{ $d->total_entrada }})
+                                            ($ {{ number_format($d->total_entrada,2) }})
                                             @endif
                                         </td>
                                         @else
@@ -202,12 +202,12 @@
                                             @if ($d->total_entrada == null)
 
                                             @else
-                                            $ {{ $d->total_entrada }}
+                                            $ {{ number_format($d->total_entrada,2) }}
                                             @endif
                                         </td>
                                         @endif
                                         
-                                        @if ($d->origen == 1)
+                                        @if ($d->origen == 2)
                                         <td class="text-danger">
                                             @if ($d->cantidad_salida == null)
 
@@ -230,12 +230,12 @@
                                         @endif
 
                                        
-                                        @if ($d->origen == 1)
+                                        @if ($d->origen == 2)
                                         <td class="text-danger">
                                             @if ($d->total_salida == null)
 
                                             @else
-                                            $ ({{ $d->total_salida }})
+                                            $ ({{ number_format($d->total_salida,2) }})
                                             @endif
 
                                         </td>
@@ -244,7 +244,7 @@
                                             @if ($d->total_salida == null)
 
                                             @else
-                                            $ {{ $d->total_salida }}
+                                            $ {{ number_format($d->total_salida,2) }}
                                             @endif
 
                                         </td>
@@ -252,7 +252,7 @@
                                        
                                         <td>{{ $d->cantidad_saldo }}</td>
 
-                                        <td>$ {{ $d->total_saldo }}</td>
+                                        <td>$ {{ number_format($d->total_saldo,2) }}</td>
                                     </tr>
                                     @endforeach
                                     @endif
