@@ -35,6 +35,7 @@
                 <table class="table " id="table">                    
                     <thead>
                         <tr>
+                            <th scope="col" class="text-start">Código de Tienda</th>
                             <th scope="col" class="text-start">Nombre</th>                           
                             <th scope="col" class="text-start">Direccion</th>
                             <th scope="col" class="text-start">Almacen</th>
@@ -43,7 +44,8 @@
                     </thead>
                     <tbody>
                         @forelse ($tiendas as $d)
-                        <tr >                            
+                        <tr >   
+                            <td class="text-start">{{ $d->codigo }}</td>                         
                             <td class="text-start">{{ $d->nombre }}</td>
                             <td class="text-start">
                                 {{ $d->direccion }}

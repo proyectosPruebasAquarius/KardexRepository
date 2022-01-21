@@ -14,6 +14,9 @@
                             <th scope="col" class="text-start">Nombre</th>                           
                             <th scope="col" class="text-start">Dirección</th>
                             <th scope="col" class="text-start">Teléfono</th>
+                            <th scope="col" class="text-start">Web</th>
+                            <th scope="col" class="text-start">Encargado</th>
+                            <th scope="col" class="text-start">Encargado Teléfono</th>
                             <th scope="col" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -22,10 +25,19 @@
                         <tr>                            
                             <td class="text-start">{{ $d->nombre }}</td>
                             <td class="text-start"> {{ $d->direccion }}</td> 
-                            <td class="text-start">{{ $d->telefono }}</td>  
+                            <td class="text-start">{{ $d->telefono }}</td>
+                            <td class="text-start">{{ $d->web }}</td>  
+                            <td class="text-start">{{ $d->encargado }}</td>
+                            <td class="text-start">{{ $d->encargado_tel }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" wire:click="$emit('assign', {{ $d }})"><i class="icon feather icon-edit f-16 text-success text-center"></i></button>
-                                <button type="button" class="btn btn-default" onclick="trash(@js($d->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger text-center"></i></button>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalCenter" wire:click="$emit('assign', {{ $d }})"><i class="icon feather icon-edit f-16 text-success text-center"></i></button>                                
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-default" onclick="trash(@js($d->id))"><i class="feather icon-trash-2 ml-3 f-16 text-danger text-center"></i></button>
+                                    </div>
+                                </div>
                             </td>                          
                         </tr>   
                         @empty

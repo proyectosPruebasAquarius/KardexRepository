@@ -13,6 +13,9 @@ class Proveedor extends Model
         'nombre',
         'direccion',
         'telefono',
+        'web',
+        'encargado',
+        'encargado_tel',
         'estado'
     ]; 
     public $timestamps = false;

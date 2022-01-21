@@ -12,6 +12,7 @@ class Tienda extends Model
         'nombre',
         'direccion',
         'estado',
+        'codigo',
         'id_almacen'
     ]; 
     public $timestamps = false;

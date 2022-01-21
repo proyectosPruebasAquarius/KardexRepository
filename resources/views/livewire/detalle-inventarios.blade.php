@@ -13,8 +13,8 @@
                     </div>
                     <div class="modal-body">
                         <form wire:submit.prevent="createDetalleInventario" id="detalleInventarioForm">
-                             <!--FECHA REGISTRO-->
-                             <div class="form-floating mb-3">
+                            <!--FECHA REGISTRO-->
+                            <div class="form-floating mb-3">
                                 <input type="date" class="form-control 
                         @error('fecha_registro')
                             is-invalid
@@ -23,7 +23,22 @@
                                 <label for="fecha_registro">Fecha</label>
                                 @error('fecha_registro') <span class="error">{{ $message }}</span> @enderror
                             </div>
+                            <!--SELECT de origen-->
+                            <div class="form-floating mb-3">
+                                <select class="form-select  @error('origen')
+                            is-invalid
+                        @enderror
+                        " wire:model="origen" aria-label="Selecione el Origen">
+                                    <option selected style="display: none">Selecione el Origen</option>
+                                    <option value="Entrada">Entrada</option>
+                                    <option value="Salida">Salida</option>
+                                    <option value="DevCompra">Devolución de Compra</option>
+                                    <option value="DevVenta">Devolución de Venta</option>
+                                </select>
 
+                                <label for="origen">Seleción del Origen</label>
+
+                            </div>
                             <div class="form-floating mb-3">
 
                                 <input type="hidden" class="form-control" wire:model="id_inventario">
@@ -42,7 +57,35 @@
                                 @error('concepto') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
-                            <!--PRECIO UNITARIO-->
+
+                            @if ($origen == "DevVenta")
+                                <!--Tipo Documento-->
+                            <div class="form-floating mb-3">
+                                <select class="form-select  @error('id_factura')
+                            is-invalid
+                        @enderror
+                        " wire:model="id_factura" aria-label="Selecione el Origen">
+                                    <option selected style="display: none">Selecione la factura</option>
+                                    @foreach ($documentos as $doc)
+                                    <option value="{{ $doc->id }}">No: {{ $doc->factura }}</option>
+                                    @endforeach
+
+                                </select>
+
+                                <label for="cantidad_entrada">Seleción del tipo de documento</label>
+
+                            </div>
+                            @endif
+
+
+
+
+
+
+                            @if ($origen == "Salida" || $origen == "DevVenta")
+
+                            @else
+                             <!--PRECIO UNITARIO-->
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control 
                         @error('precio_unitario')
@@ -53,27 +96,17 @@
                                 @error('precio_unitario') <span class="error">{{ $message }}</span> @enderror
                             </div>
 
-                            <!--SELECT de origen-->
-                            <div class="form-floating mb-3">
-                                <select class="form-select  @error('origen')
-                            is-invalid
-                        @enderror
-                        " wire:model="origen" aria-label="Selecione el Origen">
-                                    <option selected>Selecione el Origen</option>
-                                    <option value="Entrada">Entrada</option>
-                                    <option value="Salida">Salida</option>
+                            @endif
+                           
 
-                                </select>
-
-                                <label for="origen">Seleción del Origen</label>
-
-                            </div>
+                            @if ($origen == "Salida" || $origen == "Entrada")
+                            <!--Tipo Documento-->
                             <div class="form-floating mb-3">
                                 <select class="form-select  @error('tipo_documento')
                             is-invalid
                         @enderror
                         " wire:model="tipo_documento" aria-label="Selecione el Origen">
-                                    <option selected>Selecione el tipo de documento</option>
+                                    <option selected style="display: none">Selecione el tipo de documento</option>
                                     @foreach ($tipos as $t)
                                     <option value="{{ $t->id }}">{{ $t->nombre }}</option>
                                     @endforeach
@@ -86,13 +119,18 @@
                             <!--Documento-->
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control 
-                        @error('factura')
-                            is-invalid
-                        @enderror
+                            @error('factura')
+                                is-invalid
+                            @enderror
                         " id="factura" placeholder="No de Documento" wire:model="factura">
                                 <label for="factura">No de Documento</label>
                                 @error('factura') <span class="error">{{ $message }}</span> @enderror
                             </div>
+                            @endif
+
+
+                            
+
 
                             @if ($origen == 'Entrada')
 
@@ -121,7 +159,7 @@
 
 
 
-                           
+
 
 
 

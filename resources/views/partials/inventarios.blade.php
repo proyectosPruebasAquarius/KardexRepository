@@ -30,13 +30,14 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Lista de Inventarios</h4>
+                    
                     <div class="col-12 d-flex justify-content-end mt-3">
-
-
+                     
                         <!-- Button trigger modal -->
                         @livewire('inventarios')
                         @livewire('detalle-inventarios')
                         @livewire('historial-inventario')
+                        
                         <button type="button" class="btn  btn-primary" data-toggle="modal"
                             data-target="#inventarioModal">Agregar <span class="pc-micon"><i
                                     class="material-icons-two-tone text-white">add</i></span></button>
@@ -89,7 +90,9 @@
 
 @endsection
 
+
 @push('scripts')
+
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 <script>

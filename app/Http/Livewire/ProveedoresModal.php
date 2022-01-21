@@ -14,6 +14,9 @@ class ProveedoresModal extends Component
     public $direccion;
     public $idDireccion;
     public $title;
+    public $web;
+    public $encargado;
+    public $encargado_tel;
     public $telefono;
 
     protected $listeners = ['resetDataP' => 'resetState', 'assign' => 'assign'];
@@ -21,11 +24,15 @@ class ProveedoresModal extends Component
     protected $rules = [
         'nombre' => 'required|min:4',
         'direccion' => 'required|min:6|max:500',
-        'telefono' => 'required|min:8|max:10'
+        'telefono' => 'required|min:8|max:10',
+        'web' => ['nullable', 'url', 'min:3', 'max:200'],
+        'encargado' => ['nullable', 'min:4', 'max:150', 'string'],
+        'encargado_tel' => ['required', 'regex:^[0-9]{8,}$^'],
     ];
  
     protected $messages = [    
         'telefono.integer' => 'El campo teléfono debe contener valores numericos.',
+        'encargado_tel.regex' => 'El campo teléfono encargado debe contener un número de teléfono valido.',
     ];
 
     public function updated($propertyName)
@@ -48,7 +55,7 @@ class ProveedoresModal extends Component
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
                 $this->toastM('error', 'Ocurrió un error porfavor intentelo mas tarde.');
-                \Debugbar::info($th->getMessage());
+                /* \Debugbar::info($th->getMessage()); */
             }
         } else {
             try {
@@ -59,7 +66,7 @@ class ProveedoresModal extends Component
             } catch (\Exception $th) {
                 //ocurrio un error inesperado
                 $this->toastM('error', 'Ocurrió un error porfavor intentelo mas tarde.');
-                \Debugbar::info($th->getMessage());
+                /* \Debugbar::info($th->getMessage()); */
             }
         }        
     }
@@ -77,7 +84,7 @@ class ProveedoresModal extends Component
 
         $this->resetValidation();
 
-        $this->reset(['idDireccion', 'direccion', 'nombre', 'telefono']);
+        $this->reset(['idDireccion', 'direccion', 'nombre', 'telefono', 'web', 'encargado_tel', 'encargado']);
     }
 
     public function assign($e)
@@ -86,6 +93,9 @@ class ProveedoresModal extends Component
         $this->nombre = $e['nombre'];
         $this->direccion = $e['direccion'];
         $this->telefono = $e['telefono'];
+        $this->web = $e['web'];
+        $this->encargado_tel = $e['encargado_tel'];
+        $this->encargado = $e['encargado'];
     }
 
     public function render()

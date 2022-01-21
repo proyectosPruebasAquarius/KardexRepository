@@ -17,12 +17,14 @@ class Tiendas extends Component
     public $almacen;
     public $title;
     public $almacenes = array();
+    public $codigo;
 
     protected $listeners = ['resetDataTi' => 'resetState', 'assignTi' => 'assign', 'assignAlmacen' => 'assignAlmacen', 'deleteTienda' => 'trash'];
     
     protected $rules = [
         'nombre' => 'required|min:4',
         'direccion' => 'required|min:6|max:500',
+        'codigo' => 'nullable|min:3|max:100',
         'id_almacen' => 'required'        
         /* 'idDireccion' => 'required' */
     ];   
@@ -85,7 +87,7 @@ class Tiendas extends Component
 
         $this->resetValidation();
 
-        $this->reset(['idDireccion', 'direccion', 'nombre', 'id_almacen']);
+        $this->reset(['idDireccion', 'direccion', 'nombre', 'id_almacen', 'codigo']);
     }
 
     public function assign($e)
@@ -94,6 +96,7 @@ class Tiendas extends Component
         $this->nombre = $e['nombre'];
         $this->direccion = $e['direccion'];
         $this->id_almacen = $e['id_almacen'];
+        $this->codigo = $e['codigo'];
     }
 
     public function assignAlmacen($a)

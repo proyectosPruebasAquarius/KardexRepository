@@ -46,6 +46,7 @@
                             <th scope="col" class="text-center">Precio</th>
                             <th scope="col" class="text-center">Cantidad</th>
                             <th scope="col" class="text-start">Proveedor</th>
+                            <th scope="col" class="text-start">Teléfono Proveedor</th>
                             <th scope="col" class="text-start">Estado</th>
                             <th scope="col" class="no-sort text-center">Acciones</th>
                         </tr>
@@ -58,8 +59,11 @@
                             <td class="text-center">{{ $d->precio }}</td>
                             <td class="text-center">{{ $d->cantidad }}</td>
                             <td class="text-start">
-                                {{ $d->proveedor. ' - '. $d->telefono  }}
-                            </td>  
+                                {{ $d->proveedor }}
+                            </td> 
+                            <td class="text-center">
+                                {{ $d->telefono }}
+                            </td> 
                             @if ($d->estado == 1)
                                 <td class="text-start"><span class="badge rounded-pill bg-warning text-dark" style="cursor: pointer" ondblclick="Livewire.emit('edidStateM', @js($d->id), @js($d->estado)); new bootstrap.Modal(document.getElementById('pedidosModal')).show();" data-bs-toggle="tooltip" data-bs-placement="top" title="Doble click para editar">{{ __('Pendiente') }}</span></td>
                             @elseif($d->estado == 2)

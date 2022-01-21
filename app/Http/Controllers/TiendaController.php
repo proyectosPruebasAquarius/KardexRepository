@@ -17,7 +17,7 @@ class TiendaController extends Controller
         $tiendas =  Tienda::join('almacenes', 'tiendas.id_almacen', '=', 'almacenes.id')->where([
             ['almacenes.estado', 1],
             ['tiendas.estado', 1]
-        ])->select('almacenes.nombre as almacen', 'tiendas.nombre', 'tiendas.direccion', 'tiendas.id_almacen', 'tiendas.id')->get();
+        ])->select('almacenes.nombre as almacen', 'tiendas.nombre', 'tiendas.direccion', 'tiendas.id_almacen', 'tiendas.id', 'tiendas.codigo')->get();
 
         return view('layouts.tiendas')->with('tiendas', $tiendas);
     }

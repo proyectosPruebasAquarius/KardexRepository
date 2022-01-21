@@ -36,6 +36,36 @@
                             <label for="telefono">Teléfono</label>
                             @error('telefono') <span class="error">{{ $message }}</span> @enderror
                         </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control 
+                            @error('web')
+                                is-invalid
+                            @enderror
+                            " id="web" placeholder="web" wire:model="web">
+                            <label for="web">Web</label>
+                            @error('web') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control 
+                            @error('encargado')
+                                is-invalid
+                            @enderror
+                            " id="encargado" placeholder="encargado" wire:model="encargado">
+                            <label for="encargado">Encargado</label>
+                            @error('encargado') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control 
+                            @error('encargado_tel')
+                                is-invalid
+                            @enderror
+                            " id="encargado_tel" placeholder="encargado_tel" wire:model="encargado_tel" maxlength="12">
+                            <label for="encargado_tel">Encargado Teléfono</label>
+                            @error('encargado_tel') <span class="error">{{ $message }}</span> @enderror
+                        </div>
                     </form>                    
                 </div>
                 <div class="modal-footer">
