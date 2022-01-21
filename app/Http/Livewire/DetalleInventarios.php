@@ -259,6 +259,7 @@ class DetalleInventarios extends Component
 
                 $pdido = new Pedido;
                 $pdido->id_producto = $id_pForP;
+                $pdido->precio = $saveDetalle->precio_unitario;
                 $pdido->save();
 
                 if ($saveDetalle->cantidad_saldo <= $stockMin) {
