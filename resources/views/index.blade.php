@@ -139,7 +139,7 @@
             Swal.fire({
                 icon: alert['type'],
                 title: alert['message'],
-                timer: 15000,
+                timer: 1500,
                 position: alert['position']
             })
             @js(session()->forget('alert'))

@@ -58,7 +58,7 @@
                             </div>
 
 
-                            @if ($origen == "DevVenta")
+                            @if ($origen == "DevVenta" || $origen == "DevCompra")
                                 <!--Tipo Documento-->
                             <div class="form-floating mb-3">
                                 <select class="form-select  @error('id_factura')
@@ -82,7 +82,7 @@
 
 
 
-                            @if ($origen == "Salida" || $origen == "DevVenta")
+                            @if ($origen == "Salida" || $origen == "DevVenta"|| $origen == "DevCompra")
 
                             @else
                              <!--PRECIO UNITARIO-->

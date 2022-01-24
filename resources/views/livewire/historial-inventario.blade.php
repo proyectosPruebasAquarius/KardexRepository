@@ -4,9 +4,10 @@
     <div wire:ignore.self>
         <div class="modal fade" id="modalFactura{{ $key }}" aria-hidden="true" aria-labelledby="modalFacturaLabel"
             tabindex="-1" wire:ignore.self>
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
+                        
                         <h5 class="modal-title col-11 text-center" id="modalFacturaLabel">Detalle de Factura
                         </h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
@@ -16,15 +17,19 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-start">Concepto</th>
+                                    <th scope="col" class="text-start">Tipo de Documento</th>
                                     <th scope="col" class="text-start">No Factura</th>
                                     <th scope="col" class="text-start">No Factura Proveedor</th>
-                                    <th scope="col" class="text-end">Promedio Ponderado</th>
+                                    <th scope="col" class="text-end">Precio Unitario</th>
                                     <th scope="col" class="text-end">Precio Proveedor</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                   
                                     <td class="text-start">{{ $d->concepto }}</td>
+                                    <td class="text-start">{{ $d->tipo_documento }}</td>
                                     <td class="text-start">{{ $d->factura }}</td>
                                     <td class="text-start">
                                         @if ($d->factura_proveedor == null)
@@ -36,10 +41,15 @@
                                     </td>
                                     <td class="text-end">$ {{ $d->precio_unitario }}</td>
                                     <td class="text-end">
+                                        @if ($d->origen == 1)
+                                        $ {{ $d->precio_unitario }}
+                                        @else
                                         @if ($d->precio_unitario_proveedor == null)
                                         @else
                                         $ {{ $d->precio_unitario_proveedor }}
                                         @endif
+                                        @endif
+                                       
 
                                     </td>
 
@@ -156,16 +166,15 @@
                                         <td scope="col" colspan="1">
                                             {{ $d->concepto }}
                                         </td>
-                                        @if ($d->origen == 1 || $d->origen == 2)
-                                            <td>
-
-                                            </td>
-                                        @else
-                                        <td scope="col" colspan="1">
-                                            <button class="btn" data-target="#modalFactura{{ $key }}"
-                                                data-toggle="modal" data-dismiss="modal">No: {{ $d->factura }}</button>
+                                     
+                                        <td scope="col" colspan="1" >
+                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Detalle de la Factura">
+                                                <button class="btn" data-target="#modalFactura{{ $key }}"
+                                                data-toggle="modal" data-dismiss="modal" >No: {{ $d->factura }}</button>    
+                                            </span>
+                                            
                                         </td>
-                                        @endif
+                                       
                                         
                                         <td>$ {{ number_format($d->precio_unitario,2) }}</td>
 
@@ -287,13 +296,14 @@
             $("#historialModal").modal('hide');              
             });
 
-            
+           
         
             
          
             
     </script>
     @endpush
+    
 
 
 </div>
