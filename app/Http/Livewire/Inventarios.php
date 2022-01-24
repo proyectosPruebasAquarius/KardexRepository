@@ -120,10 +120,10 @@ class Inventarios extends Component
     {
         if(!empty($this->almacen)) {
             $this->zonas = AlmacenZona::where('estado',1)->where('id_almacen',$this->almacen)->select('nombre','id')->get();
-        }
-       
+        }   
+        $productoUsed = Inventario::select('id_producto')->where('estado',1)->get();
         $this->almacenes = Almacen::where('estado',1)->select('nombre','id')->get();
-        $this->productos = Producto::where('estado',1)->select('productos.cod_producto as nombre','id')->get();
+        $this->productos = Producto::where('estado',1)->whereNotIn('id',$productoUsed)->select('productos.cod_producto as nombre','id')->get();
         return view('livewire.inventarios');
     }
 }

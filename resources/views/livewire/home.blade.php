@@ -5,11 +5,11 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Dashboard sale</h5>
+                        <h5 class="m-b-10">Kardex</h5>
                     </div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item">Dashboard sale</li>
+                        <li class="breadcrumb-item"><a href="/">Kardex</a></li>
+                        <li class="breadcrumb-item">Inicio</li>
                     </ul>
                 </div>
             </div>
@@ -19,39 +19,44 @@
     <!-- [ Main Content ] start -->
     <div class="row">
         <!-- support-section start -->
-        <div class="col-xl-6 col-md-12">
+        <div class="col-xl-12 col-md-12 col-sm-12">
             <div class="card flat-card">
                 <div class="row-table">
                     <div class="col-sm-6 card-body br">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">group</i>
+                                <i class="material-icons-two-tone text-primary mb-1">shopping_bag</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
                                 <h5>1000</h5>
-                                <span>Customers</span>
+                                <span>Coca Cola</span>
+                                <br>
+                                <span>Producto con mas Salidas</span>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">language</i>
+                                <i class="material-icons-two-tone text-primary mb-1">attach_money</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
                                 <h5>$1252</h5>
-                                <span>Revenue</span>
+                                <span>Coca Cola</span>
+                                <br>
+                                <span>Total del Producto con mas Salidas</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 card-body">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">unarchive</i>
+                                <i class="material-icons-two-tone text-primary mb-1">person</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
-                                <h5>600</h5>
-                                <span>Growth</span>
+                                <h5>Industria la constancia</h5>
+                                <span>Proveedor</span>
                             </div>
                         </div>
                     </div>
@@ -60,39 +65,43 @@
                     <div class="col-sm-6 card-body br">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">swap_horizontal_circle</i>
+                                <i class="material-icons-two-tone text-primary mb-1">shopping_bag</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
                                 <h5>3550</h5>
-                                <span>Returns</span>
+                                <span>Coca Cola</span>
+                                <br>
+                                <span>Producto con mas Entradas</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">cloud_download</i>
+                                <i class="material-icons-two-tone text-primary mb-1">attach_money</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
-                                <h5>3550</h5>
-                                <span>Downloads</span>
+                                <h5>$3550</h5>
+                                <span>Coca Cola</span>
+                                <br>
+                                <span>Total del Producto con mas Entradas</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 card-body">
                         <div class="row">
                             <div class="col-sm-4">
-                                <i class="material-icons-two-tone text-primary mb-1">shopping_cart</i>
+                                <i class="material-icons-two-tone text-primary mb-1">person</i>
                             </div>
                             <div class="col-sm-8 text-md-center">
-                                <h5>100%</h5>
-                                <span>Order</span>
+                                <h5>Industria la constancia</h5>
+                                <span>Proveedor</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+        <!--    <div class="row">
                 <div class="col-md-6">
                     <div class="card support-bar overflow-hidden">
                         <div class="card-body pb-0">
@@ -145,9 +154,10 @@
                         <div id="support-chart1"></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
-        <div class="col-xl-6 col-md-12">
+
+       <!-- <div class="col-xl-6 col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h5>Department wise monthly sales report</h5>
@@ -166,10 +176,10 @@
                     <div id="account-chart"></div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- support-section end -->
         <!-- customer-section start -->
-        <div class="col-xl-6 col-md-12">
+     <!--   <div class="col-xl-6 col-md-12">
             <div class="card">
                 <div class="card-body">
                     <h6>Customer Satisfaction</h6>
@@ -268,8 +278,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-6 col-md-12">
+        </div>-->
+     <!--   <div class="col-xl-6 col-md-12">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card prod-p-card background-pattern">
@@ -431,7 +441,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- customer-section end -->
     </div>
 </div>

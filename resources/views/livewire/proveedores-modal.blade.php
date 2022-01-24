@@ -10,6 +10,16 @@
                     <form wire:submit.prevent="createData" id="formA">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control 
+                            @error('codigo')
+                                is-invalid
+                            @enderror
+                            " id="codigo" placeholder="codigo" wire:model="codigo">
+                            <label for="codigo">Código</label>
+                            @error('codigo') <span class="error">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control 
                             @error('nombre')
                                 is-invalid
                             @enderror

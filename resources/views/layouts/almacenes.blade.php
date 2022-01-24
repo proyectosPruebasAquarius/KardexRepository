@@ -25,7 +25,7 @@
 <div class="row">        
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Lista de Almacenes</h4>
+            <h4 class="card-title">Lista de Almacenes y Zonas</h4>
                     
                 
             <div class="d-flex justify-content-end col-12 mt-3"><button class="btn btn-primary" type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Agregar <i data-feather="plus"></i></button></div>

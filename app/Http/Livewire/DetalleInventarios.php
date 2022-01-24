@@ -116,7 +116,7 @@ class DetalleInventarios extends Component
         $this->validate();
         try {
             DB::beginTransaction();
-
+            $lastInsertInventario =DetalleInventariosModel::select('cantidad_saldo', 'total_saldo')->where('id_inventario',$this->id_inventario)->get();
             $saveDetalle = new DetalleInventariosModel;
             $lastInsert = DetalleInventariosModel::select('cantidad_saldo', 'total_saldo')->orderBy('id', 'DESC')->get();
             $lastEntrada = DetalleInventariosModel::whereNotNull('cantidad_entrada')->select('cantidad_entrada', 'precio_unitario')->orderBy('id', 'DESC')->first();
@@ -149,7 +149,7 @@ class DetalleInventarios extends Component
                     ]);
                 }
                 if ($this->origen == 'Entrada') {
-                    if (sizeof($lastInsert) == 0) {
+                    if (sizeof($lastInsertInventario) == 0) {
                         $saveDetalle->cantidad_entrada = $this->cantidad;
                         $saveDetalle->total_entrada = round($this->precio_unitario * $this->cantidad, 3);
                         $saveDetalle->total_entrada = bcdiv($saveDetalle->total_entrada,'1',2);
@@ -206,8 +206,18 @@ class DetalleInventarios extends Component
                     $precio_unitario_last = DetalleInventariosModel::join('documentos', 'documentos.id', '=', 'detalles_inventarios.id_documento')
                         ->select('detalles_inventarios.precio_unitario','detalles_inventarios.precio_unitario_proveedor')->where('detalles_inventarios.id_documento', $this->id_factura)->first();
 
-                    $saveDetalle->precio_unitario = $precio_unitario_last->precio_unitario_proveedor;
-                    $saveDetalle->total_entrada = round($saveDetalle->precio_unitario * $this->cantidad, 3);
+
+
+
+
+
+                        $total_promedio = $lastInsert[0]->total_saldo - $precio_unitario_last->precio_unitario_proveedor * $this->cantidad;
+                        $cantidad_promedio = $lastInsert[0]->cantidad_saldo - $this->cantidad;
+                        $saveDetalle->precio_unitario = round($total_promedio / $cantidad_promedio, 3);
+                        $saveDetalle->precio_unitario = bcdiv($saveDetalle->precio_unitario,'1',2);
+
+                    //$saveDetalle->precio_unitario = $precio_unitario_last->precio_unitario_proveedor;
+                    $saveDetalle->total_entrada = round($precio_unitario_last->precio_unitario_proveedor * $this->cantidad, 2);
                     $saveDetalle->total_entrada = bcdiv($saveDetalle->total_entrada,'1',2);
                     $saveDetalle->id_documento = $this->id_factura;
 
@@ -227,10 +237,12 @@ class DetalleInventarios extends Component
                         ->select('detalles_inventarios.precio_unitario')->where('detalles_inventarios.id_documento', $this->id_factura)->first();
                     $saveDetalle->total_salida = round($precio_unitario_last->precio_unitario * $this->cantidad, 3);
                     $saveDetalle->id_documento = $this->id_factura;
+
                     $total_promedio = $lastInsert[0]->total_saldo + $precio_unitario_last->precio_unitario * $this->cantidad;
                     $cantidad_promedio = $lastInsert[0]->cantidad_saldo + $this->cantidad;
                     $saveDetalle->precio_unitario = round($total_promedio / $cantidad_promedio, 3);
                     $saveDetalle->precio_unitario = bcdiv($saveDetalle->precio_unitario,'1',2);
+
                     $saveDetalle->origen = 2;
                     $saveDetalle->cantidad_saldo = $lastInsert[0]->cantidad_saldo + $this->cantidad;
                     $saveDetalle->total_saldo = round($saveDetalle->precio_unitario * $saveDetalle->cantidad_saldo, 3);

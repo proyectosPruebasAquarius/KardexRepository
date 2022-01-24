@@ -18,6 +18,7 @@ class ProveedoresModal extends Component
     public $encargado;
     public $encargado_tel;
     public $telefono;
+    public $codigo;
 
     protected $listeners = ['resetDataP' => 'resetState', 'assign' => 'assign'];
     
@@ -27,7 +28,8 @@ class ProveedoresModal extends Component
         'telefono' => 'required|min:8|max:10',
         'web' => ['nullable', 'url', 'min:3', 'max:200'],
         'encargado' => ['nullable', 'min:4', 'max:150', 'string'],
-        'encargado_tel' => ['required', 'regex:^[0-9]{8,}$^'],
+        'encargado_tel' => ['nullable', 'regex:^[0-9]{8,}$^'],
+        'codigo' => 'nullable|min:2|max:100|unique:proveedores'
     ];
  
     protected $messages = [    
@@ -84,7 +86,7 @@ class ProveedoresModal extends Component
 
         $this->resetValidation();
 
-        $this->reset(['idDireccion', 'direccion', 'nombre', 'telefono', 'web', 'encargado_tel', 'encargado']);
+        $this->reset(['idDireccion', 'direccion', 'nombre', 'telefono', 'web', 'encargado_tel', 'encargado', 'codigo']);
     }
 
     public function assign($e)
@@ -96,6 +98,7 @@ class ProveedoresModal extends Component
         $this->web = $e['web'];
         $this->encargado_tel = $e['encargado_tel'];
         $this->encargado = $e['encargado'];
+        $this->codigo = $e['codigo'];
     }
 
     public function render()

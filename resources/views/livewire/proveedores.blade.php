@@ -11,6 +11,7 @@
                 <table class="table" id="table">                    
                     <thead>
                         <tr>
+                            <th scope="col" class="text-start">Código</th>
                             <th scope="col" class="text-start">Nombre</th>                           
                             <th scope="col" class="text-start">Dirección</th>
                             <th scope="col" class="text-start">Teléfono</th>
@@ -22,7 +23,8 @@
                     </thead>
                     <tbody>
                         @forelse ($data as $d)
-                        <tr>                            
+                        <tr>
+                            <td class="text-start">{{ $d->codigo }}</td>                            
                             <td class="text-start">{{ $d->nombre }}</td>
                             <td class="text-start"> {{ $d->direccion }}</td> 
                             <td class="text-start">{{ $d->telefono }}</td>
