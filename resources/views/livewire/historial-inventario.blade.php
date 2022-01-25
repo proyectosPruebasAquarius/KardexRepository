@@ -59,7 +59,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" data-toggle="modal" data-dismiss="modal"
+                        <button class="btn btn-secondary" data-toggle="modal" data-dismiss="modal"
                             data-target="#historialModal">Regresar al Detalle</button>
                     </div>
                 </div>
@@ -135,8 +135,8 @@
                                         <th scope="col" colspan="2" class="text-center">Saldos</th>
                                     </tr>
                                     <tr>
-                                        <th scope="col">CONCEPTO</th>
-                                        <th scope="col">DOC</th>
+                                        <th scope="col" class="text-start">CONCEPTO</th>
+                                        <th scope="col" class="text-start">DOC</th>
                                         <th scope="col">PRECIO UNITARIO</th>
 
 
@@ -163,14 +163,15 @@
 
                                     <tr>
                                         <td>{{ $d->fecha_registro }}</td>
-                                        <td scope="col" colspan="1">
+                                        <td scope="col" colspan="1"  class="text-start">
                                             {{ $d->concepto }}
                                         </td>
                                      
-                                        <td scope="col" colspan="1" >
+                                        <td scope="col" colspan="1"  class="text-start">
                                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Detalle de la Factura">
                                                 <button class="btn" data-target="#modalFactura{{ $key }}"
-                                                data-toggle="modal" data-dismiss="modal" >No: {{ $d->factura }}</button>    
+                                                data-toggle="modal" data-dismiss="modal" ><i
+                                                class="material-icons-two-tone">description</i>  No: {{ $d->factura }}</button>    
                                             </span>
                                             
                                         </td>

@@ -29,7 +29,7 @@ class ProveedoresModal extends Component
         'web' => ['nullable', 'url', 'min:3', 'max:200'],
         'encargado' => ['nullable', 'min:4', 'max:150', 'string'],
         'encargado_tel' => ['nullable', 'regex:^[0-9]{8,}$^'],
-        'codigo' => 'nullable|min:2|max:100|unique:proveedores'
+        'codigo' => 'nullable|min:2|max:100'
     ];
  
     protected $messages = [    
